@@ -1,0 +1,515 @@
+"""
+TAHAP 1 — EKSTRAKSI, KONVERSI RAW PARQUET, DAN DATA PROFILING AWAL
+Sesuai Proposal Skripsi Bab 3.2 Tahap 1 & Gambar 3.1:
+1a. Membaca dataset lengkap occurrence.txt dari GBIF (~1,62 juta record, 230 kolom)
+    menggunakan chunking agar hemat memori (RAM).
+1b. Mengonversi data mentah ke dalam format Apache Parquet (raw_aves.parquet).
+1c. Melakukan data profiling awal (struktur data, jumlah record, tipe data,
+    missing values 230 kolom, 29 atribut Tabel 3.1, 9 kolom wajib Tabel 2.7,
+    serta estimasi metrik baseline L, U, VS, TRT, VMT).
+"""
+
+import argparse
+import csv
+import json
+from collections import Counter
+from datetime import datetime
+from pathlib import Path
+
+import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
+
+# ==============================================================================
+# 1. KONFIGURASI FILE & ATRIBUT PROPOSAL
+# ==============================================================================
+DEFAULT_INPUT_TXT = r"C:\Users\radit\Skripsi\data\DATA_GBIF.txt"
+DEFAULT_OUTPUT_DIR = r"C:\Users\radit\Skripsi\ETL\output"
+
+# 29 Atribut Struktur Data Target sesuai Tabel 3.1 Proposal Skripsi
+TARGET_29_COLUMNS = [
+    # Core Occurrence (4)
+    "gbifID", "occurrenceID", "basisOfRecord", "occurrenceStatus",
+    # Temporal (3)
+    "eventDate", "year", "month",
+    # Spatial (6)
+    "countryCode", "stateProvince", "decimalLatitude", "decimalLongitude",
+    "hasCoordinate", "hasGeospatialIssues",
+    # Taksonomi (10)
+    "scientificName", "verbatimScientificName", "acceptedScientificName",
+    "taxonKey", "acceptedTaxonKey", "taxonomicStatus", "taxonRank",
+    "family", "genus", "species",
+    # Duplicate & Provenance (6)
+    "institutionCode", "collectionCode", "catalogNumber", "recordedBy",
+    "datasetName", "publisher",
+]
+
+# Kolom tambahan untuk evaluasi kepatuhan FAIR (Tabel 2.10: datasetKey & license)
+FAIR_EXTRA_COLUMNS = ["datasetKey", "license", "issue"]
+
+# 9 Kolom Wajib Penilaian Kelengkapan (L) sesuai Tabel 2.7 Proposal Skripsi
+MANDATORY_9_COLUMNS = [
+    "occurrenceID", "scientificName", "taxonRank",
+    "decimalLatitude", "decimalLongitude", "eventDate",
+    "basisOfRecord", "publisher", "recordedBy",
+]
+
+# Penanda nilai hilang sesuai Tabel 2.3 & Bab 2.5.1 Proposal
+MISSING_MARKERS = {"", "N/A", "n/a", "NA", "na", "NULL", "null", "None", "none", "-", "<NA>", "nan"}
+
+
+# ==============================================================================
+# 2. FUNGSI BANTU DETEKSI MISSING & TIPE DATA AWAL
+# ==============================================================================
+def is_missing_series(series: pd.Series) -> pd.Series:
+    """
+    Mendeteksi nilai hilang sesuai Bab 2.5.1 Proposal:
+    NULL/NaN, string kosong, hanya spasi (whitespace), atau penanda 'N/A'.
+    """
+    is_na = series.isna()
+    s_str = series.astype("string").str.strip()
+    return is_na | s_str.isin(MISSING_MARKERS).fillna(True)
+
+
+def infer_raw_dtype_label(series: pd.Series) -> str:
+    """Menentukan label tipe data mentah untuk keperluan laporan profiling."""
+    non_null = series.dropna()
+    if len(non_null) == 0:
+        return "empty (NULL)"
+    sample = non_null.head(500).astype(str).str.strip()
+    if sample.str.upper().isin(["TRUE", "FALSE"]).all():
+        return "boolean (string)"
+    num_try = pd.to_numeric(sample.str.replace(",", ".", regex=False), errors="coerce")
+    if num_try.notna().all():
+        if (num_try % 1 == 0).all():
+            return "integer (string)"
+        return "float/decimal (string)"
+    return "string (teks)"
+
+
+# ==============================================================================
+# 3. PROSES UTAMA: CHUNK READING + KONVERSI PARQUET + PROFILING
+# ==============================================================================
+def run_extract_and_profile(
+    input_txt: str = DEFAULT_INPUT_TXT,
+    output_dir: str = DEFAULT_OUTPUT_DIR,
+    chunksize: int = 100_000,
+    save_only_target_cols: bool = False,
+):
+    input_path = Path(input_txt)
+    out_dir = Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    raw_parquet_path = out_dir / "raw_aves_indonesia.parquet"
+    profile_json_path = out_dir / "01_baseline_profile_report.json"
+    missing_csv_path = out_dir / "01_profiling_missing_230_kolom.csv"
+    target29_csv_path = out_dir / "01_profiling_29_atribut_darwin_core.csv"
+
+    if not input_path.exists():
+        raise FileNotFoundError(f"File data tidak ditemukan di: {input_path}")
+
+    # Hapus file parquet lama jika sebelumnya gagal di tengah jalan
+    if raw_parquet_path.exists():
+        raw_parquet_path.unlink()
+
+    print("=" * 75)
+    print("TAHAP 1: EKSTRAKSI, KONVERSI RAW PARQUET, DAN DATA PROFILING")
+    print("=" * 75)
+    print(f"File Sumber       : {input_path}")
+    print(f"Output Parquet    : {raw_parquet_path}")
+    print(f"Ukuran Chunk      : {chunksize:,} baris per iterasi")
+    print("-" * 75)
+
+    # Variabel Akumulator Profiling
+    total_rows = 0
+    all_columns = []
+    col_dtypes = {}
+    nan_counts = None
+    custom_missing_counts = None
+
+    # Akumulator Distribusi & Rentang
+    year_counts = Counter()
+    month_counts = Counter()
+    basis_counts = Counter()
+    taxon_rank_counts = Counter()
+    taxonomic_status_counts = Counter()
+    province_counts = Counter()
+    publisher_counts = Counter()
+    issue_counts = Counter()
+
+    # Akumulator Koordinat Mentah
+    lat_min, lat_max = float("inf"), float("-inf")
+    lon_min, lon_max = float("inf"), float("-inf")
+
+    # Akumulator Metrik Kualitas Baseline (Persamaan 2.2 - 2.6)
+    incomplete_mandatory_rows = 0
+    invalid_spatial_baseline = 0
+    zero_coord_rows = 0
+    geospatial_issue_rows = 0
+    out_of_id_bbox_rows = 0
+    invalid_vmt_baseline = 0
+
+    # Set untuk melacak Duplikasi Baseline (Persamaan 2.3)
+    seen_exact_hashes = set()
+    dup_exact_count = 0
+    seen_occ_ids = set()
+    dup_occ_id_count = 0
+    seen_cat_hashes = set()
+    dup_cat_count = 0
+    total_duplicate_rows_union = 0
+
+    # Parquet Writer (Streaming)
+    parquet_writer = None
+    parquet_schema = None
+    cols_to_save = None
+
+    # PENTING: dtype=str mencegah Pandas menebak kolom kosong di Chunk 1 sebagai float64!
+    reader = pd.read_csv(
+        input_path,
+        sep="\t",
+        chunksize=chunksize,
+        quoting=csv.QUOTE_NONE,
+        dtype=str,
+        low_memory=False,
+        on_bad_lines="warn",
+    )
+
+    for idx, chunk in enumerate(reader, start=1):
+        n_chunk = len(chunk)
+        total_rows += n_chunk
+
+        # Inisialisasi pada chunk pertama
+        if idx == 1:
+            all_columns = list(chunk.columns)
+            col_dtypes = {col: infer_raw_dtype_label(chunk[col]) for col in all_columns}
+            nan_counts = pd.Series(0, index=all_columns, dtype="int64")
+            custom_missing_counts = pd.Series(0, index=all_columns, dtype="int64")
+
+            if save_only_target_cols:
+                cols_to_save = [
+                    c for c in (TARGET_29_COLUMNS + FAIR_EXTRA_COLUMNS)
+                    if c in chunk.columns
+                ]
+            else:
+                cols_to_save = all_columns
+
+            # Kunci skema Parquet semua kolom sebagai string (pa.string()) untuk Raw Parquet
+            parquet_schema = pa.schema([(c, pa.string()) for c in cols_to_save])
+            parquet_writer = pq.ParquetWriter(
+                raw_parquet_path, parquet_schema, compression="snappy"
+            )
+
+        # Update label tipe data jika di chunk 1 masih kosong tetapi di chunk berikutnya ada isi
+        for c in TARGET_29_COLUMNS:
+            if c in chunk.columns and col_dtypes.get(c) == "empty (NULL)":
+                if chunk[c].notna().any():
+                    col_dtypes[c] = infer_raw_dtype_label(chunk[c])
+
+        # ------------------------------------------------------------------
+        # A. PROFILING MISSING VALUES (230 KOLOM)
+        # ------------------------------------------------------------------
+        nan_counts += chunk.isna().sum()
+
+        for col in TARGET_29_COLUMNS:
+            if col in chunk.columns:
+                custom_missing_counts[col] += int(is_missing_series(chunk[col]).sum())
+
+        other_cols = [c for c in all_columns if c not in TARGET_29_COLUMNS]
+        custom_missing_counts[other_cols] += chunk[other_cols].isna().sum()
+
+        # ------------------------------------------------------------------
+        # B. PROFILING KELENGKAPAN BASELINE (Persamaan 2.2 - 9 Kolom Wajib)
+        # ------------------------------------------------------------------
+        avail_mandatory = [c for c in MANDATORY_9_COLUMNS if c in chunk.columns]
+        missing_any_mandatory = pd.Series(False, index=chunk.index)
+        for col in avail_mandatory:
+            missing_any_mandatory |= is_missing_series(chunk[col])
+        incomplete_mandatory_rows += int(missing_any_mandatory.sum())
+
+        # ------------------------------------------------------------------
+        # C. PROFILING KEUNIKAN BASELINE (Persamaan 2.3 - 3 Tingkat Duplikasi)
+        # ------------------------------------------------------------------
+        is_dup_row = pd.Series(False, index=chunk.index)
+
+        # 1. Duplikasi Eksak (Bebas Pandas4Warning karena astype("string") dilakukan sebelum fillna)
+        exact_cols = ["taxonKey", "decimalLatitude", "decimalLongitude", "eventDate", "recordedBy", "publisher"]
+        if all(c in chunk.columns for c in exact_cols):
+            exact_df_str = chunk[exact_cols].astype("string").fillna("__NULL__")
+            exact_hashes = pd.util.hash_pandas_object(exact_df_str, index=False)
+            for pos, h in enumerate(exact_hashes):
+                if h in seen_exact_hashes:
+                    dup_exact_count += 1
+                    is_dup_row.iloc[pos] = True
+                else:
+                    seen_exact_hashes.add(h)
+
+        # 2. Duplikasi Identifier (occurrenceID tidak kosong)
+        if "occurrenceID" in chunk.columns:
+            occ_miss = is_missing_series(chunk["occurrenceID"])
+            occ_vals = chunk["occurrenceID"].astype("string").fillna("").str.strip()
+            for pos, (miss, val) in enumerate(zip(occ_miss, occ_vals)):
+                if not miss:
+                    h = hash(val)
+                    if h in seen_occ_ids:
+                        dup_occ_id_count += 1
+                        is_dup_row.iloc[pos] = True
+                    else:
+                        seen_occ_ids.add(h)
+
+        # 3. Duplikasi Sumber/Katalog (institutionCode, collectionCode, catalogNumber ketiganya terisi)
+        cat_cols = ["institutionCode", "collectionCode", "catalogNumber"]
+        if all(c in chunk.columns for c in cat_cols):
+            cat_valid = ~(
+                is_missing_series(chunk["institutionCode"])
+                | is_missing_series(chunk["collectionCode"])
+                | is_missing_series(chunk["catalogNumber"])
+            )
+            cat_df_str = chunk[cat_cols].astype("string").fillna("")
+            cat_hashes = pd.util.hash_pandas_object(cat_df_str, index=False)
+            for pos, (valid_cat, h) in enumerate(zip(cat_valid, cat_hashes)):
+                if valid_cat:
+                    if h in seen_cat_hashes:
+                        dup_cat_count += 1
+                        is_dup_row.iloc[pos] = True
+                    else:
+                        seen_cat_hashes.add(h)
+
+        total_duplicate_rows_union += int(is_dup_row.sum())
+
+        # ------------------------------------------------------------------
+        # D. PROFILING SPASIAL BASELINE (Persamaan 2.4)
+        # ------------------------------------------------------------------
+        if "decimalLatitude" in chunk.columns and "decimalLongitude" in chunk.columns:
+            lat_s = chunk["decimalLatitude"].astype("string").str.replace(",", ".", regex=False)
+            lon_s = chunk["decimalLongitude"].astype("string").str.replace(",", ".", regex=False)
+            lat = pd.to_numeric(lat_s, errors="coerce")
+            lon = pd.to_numeric(lon_s, errors="coerce")
+
+            if lat.notna().any():
+                lat_min = min(lat_min, float(lat.min()))
+                lat_max = max(lat_max, float(lat.max()))
+            if lon.notna().any():
+                lon_min = min(lon_min, float(lon.min()))
+                lon_max = max(lon_max, float(lon.max()))
+
+            is_zero = (lat == 0) & (lon == 0)
+            zero_coord_rows += int(is_zero.sum())
+
+            in_id_bbox = lat.between(-11.5, 6.5) & lon.between(94.5, 141.5)
+            out_of_id_bbox_rows += int((~in_id_bbox & lat.notna() & lon.notna()).sum())
+
+            has_geo_issue = pd.Series(False, index=chunk.index)
+            if "hasGeospatialIssues" in chunk.columns:
+                has_geo_issue = (
+                    chunk["hasGeospatialIssues"].astype("string").fillna("").str.upper().str.strip() == "TRUE"
+                )
+                geospatial_issue_rows += int(has_geo_issue.sum())
+
+            inv_spatial = lat.isna() | lon.isna() | is_zero | (~in_id_bbox) | has_geo_issue
+            invalid_spatial_baseline += int(inv_spatial.sum())
+
+        # ------------------------------------------------------------------
+        # E. PROFILING TEMPORAL & METADATA BASELINE (Persamaan 2.6)
+        # ------------------------------------------------------------------
+        if "year" in chunk.columns:
+            yr = pd.to_numeric(chunk["year"], errors="coerce").dropna().astype(int)
+            year_counts.update(yr.value_counts().to_dict())
+
+        if "month" in chunk.columns:
+            mn = pd.to_numeric(chunk["month"], errors="coerce").dropna().astype(int)
+            month_counts.update(mn.value_counts().to_dict())
+
+        if "basisOfRecord" in chunk.columns and "eventDate" in chunk.columns:
+            bor_miss = is_missing_series(chunk["basisOfRecord"])
+            ed_miss = is_missing_series(chunk["eventDate"])
+            ed_parsed = pd.to_datetime(chunk["eventDate"], errors="coerce", utc=True, format="mixed")
+            inv_vmt = bor_miss | ed_miss | ed_parsed.isna()
+            invalid_vmt_baseline += int(inv_vmt.sum())
+
+        # ------------------------------------------------------------------
+        # F. DISTRIBUSI KATEGORIKAL & TAKSONOMI
+        # ------------------------------------------------------------------
+        if "basisOfRecord" in chunk.columns:
+            basis_counts.update(chunk["basisOfRecord"].dropna().value_counts().to_dict())
+        if "taxonRank" in chunk.columns:
+            taxon_rank_counts.update(chunk["taxonRank"].dropna().value_counts().to_dict())
+        if "taxonomicStatus" in chunk.columns:
+            taxonomic_status_counts.update(chunk["taxonomicStatus"].dropna().value_counts().to_dict())
+        if "stateProvince" in chunk.columns:
+            province_counts.update(chunk["stateProvince"].dropna().value_counts().to_dict())
+        if "publisher" in chunk.columns:
+            publisher_counts.update(chunk["publisher"].dropna().value_counts().to_dict())
+        if "issue" in chunk.columns:
+            issues_split = chunk["issue"].dropna().str.split(";").explode()
+            issue_counts.update(issues_split[issues_split != ""].value_counts().to_dict())
+
+        # ------------------------------------------------------------------
+        # G. KONVERSI & TULIS KE APACHE PARQUET (TAHAP 1b - BEBAS ERROR TIPE DATA)
+        # ------------------------------------------------------------------
+        sub_df = chunk[cols_to_save].astype("string")
+        table = pa.Table.from_pandas(sub_df, schema=parquet_schema, preserve_index=False)
+        parquet_writer.write_table(table)
+
+        print(f"  [Chunk {idx:02d}] Berhasil memproses & menulis {total_rows:,} record...")
+
+    if parquet_writer is not None:
+        parquet_writer.close()
+
+    # ==============================================================================
+    # 4. PERHITUNGAN METRIK BASELINE (PERSAMAAN 2.2 - 2.6 PROPOSAL)
+    # ==============================================================================
+    L_baseline = ((total_rows - incomplete_mandatory_rows) / total_rows) * 100.0
+    U_baseline = ((total_rows - total_duplicate_rows_union) / total_rows) * 100.0
+    VS_baseline = ((total_rows - invalid_spatial_baseline) / total_rows) * 100.0
+
+    n_acc_base = taxonomic_status_counts.get("ACCEPTED", 0)
+    n_syn_base = (
+        taxonomic_status_counts.get("SYNONYM", 0)
+        + taxonomic_status_counts.get("HETEROTYPIC_SYNONYM", 0)
+        + taxonomic_status_counts.get("HOMOTYPIC_SYNONYM", 0)
+        + taxonomic_status_counts.get("PROPARTE_SYNONYM", 0)
+    )
+    TRT_baseline = ((n_acc_base + n_syn_base) / total_rows) * 100.0
+    VMT_baseline = ((total_rows - invalid_vmt_baseline) / total_rows) * 100.0
+
+    # ==============================================================================
+    # 5. PENYUSUNAN TABEL PROFILING (230 KOLOM & 29 ATRIBUT DARWIN CORE)
+    # ==============================================================================
+    df_missing_all = pd.DataFrame({
+        "kolom": nan_counts.index,
+        "tipe_data_awal": [col_dtypes[c] for c in nan_counts.index],
+        "jumlah_NaN": nan_counts.values,
+        "persentase_NaN": (nan_counts.values / total_rows * 100).round(2),
+    }).sort_values("persentase_NaN", ascending=False).reset_index(drop=True)
+    df_missing_all.to_csv(missing_csv_path, index=False)
+
+    rows_29 = []
+    for no, col in enumerate(TARGET_29_COLUMNS, start=1):
+        ada = col in all_columns
+        jml_miss = int(custom_missing_counts[col]) if ada else total_rows
+        pct_miss = round(jml_miss / total_rows * 100, 4) if ada else 100.0
+        rows_29.append({
+            "No": no,
+            "Atribut_Darwin_Core": col,
+            "Wajib_Tabel_2_7": "Ya" if col in MANDATORY_9_COLUMNS else "Tidak",
+            "Tipe_Data_Raw": col_dtypes.get(col, "TIDAK_ADA"),
+            "Jumlah_Missing": jml_miss,
+            "Persentase_Missing (%)": pct_miss,
+            "Persentase_Terisi (%)": round(100.0 - pct_miss, 4),
+        })
+    df_target_29 = pd.DataFrame(rows_29)
+    df_target_29.to_csv(target29_csv_path, index=False)
+
+    tahun_sorted = sorted(year_counts.keys())
+    tahun_min = min(tahun_sorted) if tahun_sorted else None
+    tahun_max = max(tahun_sorted) if tahun_sorted else None
+
+    baseline_report = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "source_file": str(input_path),
+        "raw_parquet_file": str(raw_parquet_path),
+        "raw_parquet_size_mb": round(raw_parquet_path.stat().st_size / (1024 * 1024), 2),
+        "dataset_summary": {
+            "total_records": int(total_rows),
+            "total_columns_raw": len(all_columns),
+            "total_columns_saved_parquet": len(cols_to_save),
+            "year_min": tahun_min,
+            "year_max": tahun_max,
+            "complete_columns_0pct_missing": int((df_missing_all["jumlah_NaN"] == 0).sum()),
+            "empty_columns_100pct_missing": int((df_missing_all["jumlah_NaN"] == total_rows).sum()),
+        },
+        "baseline_quality_metrics_eq_2_2_to_2_6": {
+            "L_completeness_pct": round(L_baseline, 4),
+            "U_uniqueness_pct": round(U_baseline, 4),
+            "VS_spatial_validity_pct": round(VS_baseline, 4),
+            "TRT_taxonomic_resolution_pct": round(TRT_baseline, 4),
+            "VMT_metadata_temporal_validity_pct": round(VMT_baseline, 4),
+            "details": {
+                "m_c_incomplete_mandatory_records": incomplete_mandatory_rows,
+                "d_total_duplicate_records": total_duplicate_rows_union,
+                "dup_exact_records": dup_exact_count,
+                "dup_occurrenceID_records": dup_occ_id_count,
+                "dup_catalog_records": dup_cat_count,
+                "i_s_invalid_spatial_records": invalid_spatial_baseline,
+                "zero_coord_records": zero_coord_rows,
+                "out_of_indonesia_bbox_records": out_of_id_bbox_rows,
+                "has_geospatial_issues_records": geospatial_issue_rows,
+                "n_accepted_baseline": n_acc_base,
+                "n_synonym_baseline": n_syn_base,
+                "i_mt_invalid_metadata_temporal_records": invalid_vmt_baseline,
+            },
+        },
+        "spatial_summary": {
+            "lat_range": [round(lat_min, 5), round(lat_max, 5)],
+            "lon_range": [round(lon_min, 5), round(lon_max, 5)],
+        },
+        "distributions": {
+            "year_distribution": {str(k): int(year_counts[k]) for k in tahun_sorted},
+            "month_distribution": {str(k): int(month_counts[k]) for k in sorted(month_counts.keys())},
+            "basisOfRecord": dict(basis_counts.most_common()),
+            "taxonRank": dict(taxon_rank_counts.most_common()),
+            "taxonomicStatus": dict(taxonomic_status_counts.most_common()),
+            "top_15_stateProvince": dict(province_counts.most_common(15)),
+            "top_15_publisher": dict(publisher_counts.most_common(15)),
+            "top_15_gbif_issues": dict(issue_counts.most_common(15)),
+        },
+        "darwin_core_29_attributes": rows_29,
+    }
+
+    with open(profile_json_path, "w", encoding="utf-8") as f:
+        json.dump(baseline_report, f, ensure_ascii=False, indent=2)
+
+    # ==============================================================================
+    # 6. CETAK RINGKASAN KE TERMINAL (SIAP MASUK BAB IV SKRIPSI)
+    # ==============================================================================
+    print("\n" + "=" * 75)
+    print("RINGKASAN HASIL DATA PROFILING AWAL (TAHAP 1)")
+    print("=" * 75)
+    print(f"Jumlah Record           : {total_rows:,} record")
+    print(f"Jumlah Kolom Mentah     : {len(all_columns)} kolom")
+    print(f"Kolom Lengkap (0% NaN)  : {(df_missing_all['jumlah_NaN'] == 0).sum()} kolom")
+    print(f"Kolom Kosong (100% NaN) : {(df_missing_all['jumlah_NaN'] == total_rows).sum()} kolom")
+    print(f"Rentang Tahun Observasi : {tahun_min} - {tahun_max}")
+    print(f"Ukuran File Raw Parquet : {baseline_report['raw_parquet_size_mb']} MB")
+
+    print("\n--- PROFILING 29 ATRIBUT STRUKTUR DATA DARWIN CORE (TABEL 3.1) ---")
+    print(df_target_29.to_string(index=False))
+
+    print("\n--- SKOR BASELINE 5 DIMENSI KUALITAS DATA (PERSAMAAN 2.2 - 2.6) ---")
+    print(f"1. Kelengkapan (L)                  : {L_baseline:.2f}% (Tidak lengkap: {incomplete_mandatory_rows:,} record)")
+    print(f"2. Keunikan (U)                     : {U_baseline:.2f}% (Duplikat: {total_duplicate_rows_union:,} record)")
+    print(f"   - Duplikasi Eksak                : {dup_exact_count:,} record")
+    print(f"   - Duplikasi occurrenceID         : {dup_occ_id_count:,} record")
+    print(f"   - Duplikasi Sumber/Katalog       : {dup_cat_count:,} record")
+    print(f"3. Validitas Spasial (VS)           : {VS_baseline:.2f}% (Invalid awal: {invalid_spatial_baseline:,} record)")
+    print(f"4. Tingkat Resolusi Taksonomi (TRT) : {TRT_baseline:.2f}% (Accepted: {n_acc_base:,}, Synonym: {n_syn_base:,})")
+    print(f"5. Validitas Metadata & Temp (VMT)  : {VMT_baseline:.2f}% (Invalid awal: {invalid_vmt_baseline:,} record)")
+
+    print("\n--- FILE OUTPUT YANG DIHASILKAN ---")
+    print(f"1. Raw Parquet          : {raw_parquet_path}")
+    print(f"2. JSON Baseline Report : {profile_json_path}")
+    print(f"3. CSV 230 Kolom NaN    : {missing_csv_path}")
+    print(f"4. CSV 29 Kolom DwC     : {target29_csv_path}")
+    print("=" * 75)
+
+    return baseline_report
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=str, default=DEFAULT_INPUT_TXT)
+    parser.add_argument("--outdir", type=str, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--chunksize", type=int, default=100_000)
+    parser.add_argument(
+        "--only-target-cols",
+        action="store_true",
+        help="Jika aktif, hanya menyimpan 29+3 kolom relevan ke raw Parquet.",
+    )
+    args, _ = parser.parse_known_args()
+
+    run_extract_and_profile(
+        input_txt=args.input,
+        output_dir=args.outdir,
+        chunksize=args.chunksize,
+        save_only_target_cols=args.only_target_cols,
+    )

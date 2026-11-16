@@ -1,0 +1,6 @@
+Kode,Dimensi_Kualitas,Baseline_Sebelum_ETL (%),Sesudah_ETL_Clean_Set (%),Kenaikan_Delta_X (%)
+L,Kelengkapan (Completeness),99.6622,100.0,0.3378
+U,Keunikan (Uniqueness),97.7026,100.0,2.2974
+VS,Validitas Spasial (Spatial Validity),87.7779,100.0,12.2221
+TRT,Tingkat Resolusi Taksonomi (Catalogue of Life XR),92.4103,100.0,7.5897
+VMT,Validitas Metadata & Temporal,94.4372,100.0,5.5628

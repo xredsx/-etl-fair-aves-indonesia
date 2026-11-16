@@ -1,0 +1,211 @@
+{
+  "evaluated_at": "2026-11-12T11:39:38",
+  "github_detection": {
+    "git_repo_detected": false,
+    "git_root": null,
+    "remote_origin_url": null,
+    "github_https_url": null,
+    "github_owner_repo": null,
+    "local_commit_sha": null,
+    "pushed_to_remote": false,
+    "http_accessible": false,
+    "http_status_code": null,
+    "is_open_free_access": false,
+    "github_has_files_online": false,
+    "detection_method": "Belum terdeteksi",
+    "detail_message": "BELUM DIUPLOAD KE GITHUB (Tidak ditemukan remote .git GitHub maupun GITHUB_REPO_URL_MANUAL)"
+  },
+  "formula_2_9": "Overall FAIR Score = (FAIR_F + FAIR_A + FAIR_I + FAIR_R) / 4",
+  "dimension_scores": {
+    "FAIR_F": 1.0,
+    "FAIR_A": 0.0,
+    "FAIR_I": 1.0,
+    "FAIR_R": 1.0
+  },
+  "overall_fair_score_0_to_1": 0.75,
+  "overall_fair_score_pct": 75.0,
+  "projected_overall_fair_score_if_github_uploaded_pct": 100.0,
+  "before_vs_after_quality_delta_x": [
+    {
+      "Kode": "L",
+      "Dimensi_Kualitas": "Kelengkapan (Completeness)",
+      "Baseline_Sebelum_ETL (%)": 99.6622,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 0.3378
+    },
+    {
+      "Kode": "U",
+      "Dimensi_Kualitas": "Keunikan (Uniqueness)",
+      "Baseline_Sebelum_ETL (%)": 97.7026,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 2.2974
+    },
+    {
+      "Kode": "VS",
+      "Dimensi_Kualitas": "Validitas Spasial (Spatial Validity)",
+      "Baseline_Sebelum_ETL (%)": 87.7779,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 12.2221
+    },
+    {
+      "Kode": "TRT",
+      "Dimensi_Kualitas": "Tingkat Resolusi Taksonomi (Catalogue of Life XR)",
+      "Baseline_Sebelum_ETL (%)": 92.4103,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 7.5897
+    },
+    {
+      "Kode": "VMT",
+      "Dimensi_Kualitas": "Validitas Metadata & Temporal",
+      "Baseline_Sebelum_ETL (%)": 94.4372,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 5.5628
+    }
+  ],
+  "indicators_table_2_10": [
+    {
+      "Dimensi": "Findable (F)",
+      "Kode_Indikator": "F1",
+      "Nama_Indikator": "F1. Persistent Identifier",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset/output memiliki persistent identifier yang dapat digunakan untuk mengidentifikasi dataset secara unik.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Dataset memiliki identifier unik berbasis SHA-256 (urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5) pada 07_dataset_metadata_fair.json serta gbifID & occurrenceID unik pada 100% (1,501,875) record.",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Findable (F)",
+      "Kode_Indikator": "F2",
+      "Nama_Indikator": "F2. Rich Metadata",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Tersedia metadata deskriptif yang memuat judul, deskripsi, cakupan taksonomi/spasial/temporal, dan jumlah record.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "File 07_dataset_metadata_fair.json memuat judul, deskripsi, cakupan taksonomi Catalogue of Life (3,156 spesies, 126 famili), spasial (-11.424224 s/d 5.99363 LS/LU), temporal (2000-01-01 s/d 2026-11-01), dan jumlah record (1,501,875 Clean, 49,866 Quarantine).",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Findable (F)",
+      "Kode_Indikator": "F3",
+      "Nama_Indikator": "F3. Metadata–Data Identifier",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Metadata mencantumkan identifier dataset yang dideskripsikannya secara eksplisit.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Metadata mencantumkan eksplisit described_dataset_id (urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5) beserta nama file fisik (clean_store_aves_indonesia.duckdb, occurrence_clean.parquet) dan hash SHA-256 masing-masing artefak.",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Accessible (A)",
+      "Kode_Indikator": "A1",
+      "Nama_Indikator": "A1. Standardized Access Protocol",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset dapat diakses melalui identifier menggunakan protokol standar seperti HTTP/HTTPS.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 0.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "BELUM TERPENUHI (Skor 0.0): Deteksi otomatis menunjukkan dataset masih berada di penyimpanan lokal dan belum diunggah (push) ke repositori daring berbasis HTTP/HTTPS (GitHub).",
+      "Skor_Tertimbang (w_i * s_i)": 0.0,
+      "Status_Pemenuhan": "Belum Terpenuhi (0%)"
+    },
+    {
+      "Dimensi": "Accessible (A)",
+      "Kode_Indikator": "A1.1",
+      "Nama_Indikator": "A1.1. Open/Free Access",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset dapat diakses melalui protokol yang tidak memerlukan pembayaran.",
+      "Prioritas": "Important",
+      "Bobot (w_i)": 2,
+      "Skor_Pemenuhan (s_i)": 0.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "BELUM TERPENUHI (Skor 0.0): Karena dataset belum diunggah ke GitHub publik, akses protokol terbuka bebas biaya secara daring belum aktif.",
+      "Skor_Tertimbang (w_i * s_i)": 0.0,
+      "Status_Pemenuhan": "Belum Terpenuhi (0%)"
+    },
+    {
+      "Dimensi": "Interoperable (I)",
+      "Kode_Indikator": "I1",
+      "Nama_Indikator": "I1. Knowledge Representation",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset tersimpan dalam format yang bisa dibaca mesin dengan struktur kolom mengacu pada Darwin Core.",
+      "Prioritas": "Important",
+      "Bobot (w_i)": 2,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Tersimpan dalam format terstruktur mesin Apache Parquet ZSTD (occurrence_clean.parquet) dan tabel relasional DuckDB (clean_store_aves_indonesia.duckdb -> occurrence_clean, 52 kolom) yang mengacu pada Darwin Core.",
+      "Skor_Tertimbang (w_i * s_i)": 2.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Interoperable (I)",
+      "Kode_Indikator": "I2",
+      "Nama_Indikator": "I2. FAIR Vocabulary",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Nama kolom dan istilah utama menggunakan istilah baku Darwin Core dan referensi taksonomi Catalogue of Life (COL XR).",
+      "Prioritas": "Important",
+      "Bobot (w_i)": 2,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Menggunakan istilah baku Darwin Core (28 atribut aktif + 2 atribut identik yang disatukan) serta kosakata taksonomi terkendali Catalogue of Life eXtended Release (taxonKey & acceptedTaxonKey COL XR, scientificName berstatus ACCEPTED).",
+      "Skor_Tertimbang (w_i * s_i)": 2.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Interoperable (I)",
+      "Kode_Indikator": "I3",
+      "Nama_Indikator": "I3. Qualified References",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset memiliki referensi eksplisit dan bermakna terhadap data atau entitas terkait, misalnya taxonKey dan datasetKey.",
+      "Prioritas": "Important",
+      "Bobot (w_i)": 2,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Memiliki referensi eksternal bermakna pada level record: taxonKey terisi 1,501,875/1,501,875 (100.00%) menuju Catalogue of Life (COL XR) dan datasetKey terisi 1,501,875/1,501,875 (100.00%) menuju sumber dataset GBIF.",
+      "Skor_Tertimbang (w_i * s_i)": 2.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Reusable (R)",
+      "Kode_Indikator": "R1",
+      "Nama_Indikator": "R1. Sufficient Metadata",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Metadata memuat deskripsi, cakupan, jumlah record, dan tanggal pembuatan dataset.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Metadata 07_dataset_metadata_fair.json memuat deskripsi kurasi, cakupan taksonomi/spasial/temporal, jumlah record (1,501,875 Clean & 49,866 Quarantine), dan tanggal pembuatan (2026-11-12).",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Reusable (R)",
+      "Kode_Indikator": "R1.1",
+      "Nama_Indikator": "R1.1. License",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset menyertakan informasi lisensi atau ketentuan penggunaan secara eksplisit.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Mencantumkan lisensi eksplisit pada level dataset (CC-BY-4.0 (mengikuti atribusi sumber GBIF pada tiap record)) dan kolom 'license' pada level record yang terisi 1,501,875/1,501,875 record (100.00%).",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Reusable (R)",
+      "Kode_Indikator": "R1.2",
+      "Nama_Indikator": "R1.2. Provenance",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset menyertakan informasi sumber GBIF, tanggal ekstraksi, dan tahapan pipeline yang dilalui.",
+      "Prioritas": "Important",
+      "Bobot (w_i)": 2,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Menyertakan riwayat asal-usul data GBIF (datasetKey, publisher, institutionCode, recordedBy), nilai asli sebelum transformasi (verbatimScientificName, verbatimEventDateRaw), log waktu muat (etl_load_log), dan dokumentasi 6 tahapan pipeline ETL.",
+      "Skor_Tertimbang (w_i * s_i)": 2.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    },
+    {
+      "Dimensi": "Reusable (R)",
+      "Kode_Indikator": "R1.3",
+      "Nama_Indikator": "R1.3. Community Standard",
+      "Operasionalisasi_dan_Kriteria_Pemenuhan": "Struktur dan istilah dataset mengikuti standar Darwin Core pada field yang relevan.",
+      "Prioritas": "Essential",
+      "Bobot (w_i)": 3,
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Struktur kolom mematuhi standar komunitas Simple Darwin Core (seluruh 29/29 atribut inti terpetakan: 28 atribut Darwin Core aktif + 2 atribut identik yang disatukan, eventDate bertipe DATE ISO 8601, koordinat desimal WGS84).",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
+    }
+  ]
+}

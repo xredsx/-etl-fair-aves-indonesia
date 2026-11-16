@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-11-12T07:33:44",
+  "physical_lines_minus_header": 1551741,
+  "total_records": 1551741,
+  "skipped_malformed_lines": 0,
+  "total_columns_raw": 53,
+  "source_file": "data_FIX.csv",
+  "source_format": "GBIF Simple CSV (tab-delimited)",
+  "derived_columns": [
+    "hasCoordinate",
+    "hasGeospatialIssues",
+    "publisher"
+  ],
+  "geospatial_issue_flags_used": [
+    "ZERO_COORDINATE",
+    "COORDINATE_OUT_OF_RANGE",
+    "COORDINATE_INVALID",
+    "COUNTRY_COORDINATE_MISMATCH"
+  ],
+  "publisher_lookup_failed_keys": [],
+  "baseline_metrics": {
+    "L": 99.6622,
+    "U": 97.7026,
+    "VS": 87.7779,
+    "TRT": 99.8855,
+    "VMT": 94.4372
+  },
+  "baseline_details_with_warning_excluded": {
+    "m_c_incomplete_mandatory": 5242,
+    "d_duplicate_union": 35649,
+    "dup_exact_non_null": 35646,
+    "dup_occurrenceID": 0,
+    "dup_catalog": 3,
+    "i_s_invalid_or_marine_spatial": 189656,
+    "spatial_baseline_breakdown": {
+      "VALID_INDONESIA_LAND_POLYGON": 1362085,
+      "INVALID_OTHER_COUNTRY_LAND": 477,
+      "WARNING_OR_INVALID_SEA_AREA": 186214,
+      "INVALID_OUTSIDE_INDONESIA_BBOX": 15,
+      "INVALID_MISSING_COORD": 2844,
+      "INVALID_ZERO_COORD": 106,
+      "INVALID_GEOSPATIAL_ISSUE_FLAG": 0
+    },
+    "i_mt_invalid_or_unstandardized_vmt": 86320,
+    "raw_eventDate_status_breakdown": {
+      "WARNING_NEEDS_STANDARDIZATION": 85402,
+      "VALID_ISO_STRICT": 1465421,
+      "WARNING_PARTIAL_OR_INTERVAL": 918
+    },
+    "vmt_inconsistent_year_month_records": 0,
+    "i_t_unstandardized_or_unresolved_taxonomy": 1776
+  }
+}

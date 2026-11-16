@@ -1,0 +1,7 @@
+Kolom,Sebelum,Sesudah,Perubahan
+occurrenceID,(kosong) (kosong pada CSV sumber),NULL (pd.NA),Nilai kosong diseragamkan menjadi NULL
+eventDate (T00:00),"""2016-09-29T00:00"" (string)",2016-09-29 (date32),Standardisasi deterministik waktu T00:00 ke ISO 8601
+eventDate (Waktu Spesifik),"""2023-09-21T00:46:34.220Z"" (string)",2023-09-21 (date32),Pemotongan komponen jam ke tanggal ISO 8601 (jam asli di verbatimEventDateRaw)
+eventDate (Parsial/Interval),"""2013"" (string)",NULL (Warning: Partial/Interval),Tanggal parsial tidak dikarang ke 01-01; ditandai sebagai Warning
+decimalLatitude,"""3.9"" (string)",3.9 (float64),Penyelarasan tipe data teks ke float64
+hasCoordinate,"""true"" (string)",True (boolean),Penyelarasan tipe data teks ke boolean

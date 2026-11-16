@@ -1,0 +1,6 @@
+Kategori_Tabel_2_5,Jumlah_Record (n_status),Persentase_P_status (%),Contoh_Input_Verbatim,Contoh_Hasil_Matched,Contoh_matchedTaxonKey,Keputusan_Validasi
+Accepted,1433968,92.4103,Centropus sinensis,"Centropus sinensis (Stephens, 1815)",SB7W,VALID (Diubah ke Accepted)
+Synonym resolved,115997,7.4753,Macronus bornensis,"Mixornis bornensis Bonaparte, 1850",R2MD3,VALID (Diubah ke Accepted)
+Higher-rank match,1776,0.1145,Zosterops sp. Wangi-wangi white-eye,"Zosterops Vigors & Horsfield, 1827",8B88,INVALID (Masuk Quarantine)
+Fuzzy match,0,0.0,-,-,-,VALID jika <= 2 huruf (0) / INVALID (0)
+No match,0,0.0,-,-,-,INVALID (Masuk Quarantine)

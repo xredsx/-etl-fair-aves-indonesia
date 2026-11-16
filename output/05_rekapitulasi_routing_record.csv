@@ -1,0 +1,4 @@
+Status_Akhir_Record,Target_Penyimpanan,Jumlah_Record,Proporsi (%)
+Clean,Clean Set (DuckDB & Parquet),1501854,96.7851
+Warning,Clean Set (DuckDB & Parquet),21,0.0014
+Quarantine,Quarantine Store (DuckDB & Parquet),49866,3.2136

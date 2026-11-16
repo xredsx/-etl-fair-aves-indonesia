@@ -1,0 +1,349 @@
+{
+  "total_records_validated": 1551741,
+  "clean_set_records": 1501875,
+  "clean_only_records": 1501854,
+  "warning_records_in_clean_set": 21,
+  "quarantine_records": 49866,
+  "retention_rate_pct": 96.7864,
+  "trt_baseline_mode": "ACCEPTED_ONLY",
+  "dimension_status_breakdown": [
+    {
+      "Dimensi_Kualitas": "Completeness",
+      "Valid": 1546499,
+      "Valid (%)": 99.6622,
+      "Warning": 0,
+      "Warning (%)": 0.0,
+      "Invalid": 5242,
+      "Invalid (%)": 0.3378
+    },
+    {
+      "Dimensi_Kualitas": "Uniqueness",
+      "Valid": 1513586,
+      "Valid (%)": 97.5411,
+      "Warning": 0,
+      "Warning (%)": 0.0,
+      "Invalid": 38155,
+      "Invalid (%)": 2.4589
+    },
+    {
+      "Dimensi_Kualitas": "Spatial",
+      "Valid": 1543301,
+      "Valid (%)": 99.4561,
+      "Warning": 0,
+      "Warning (%)": 0.0,
+      "Invalid": 8440,
+      "Invalid (%)": 0.5439
+    },
+    {
+      "Dimensi_Kualitas": "Taxonomy",
+      "Valid": 1549965,
+      "Valid (%)": 99.8855,
+      "Warning": 0,
+      "Warning (%)": 0.0,
+      "Invalid": 1776,
+      "Invalid (%)": 0.1145
+    },
+    {
+      "Dimensi_Kualitas": "Metadata_Temporal",
+      "Valid": 1550823,
+      "Valid (%)": 99.9408,
+      "Warning": 918,
+      "Warning (%)": 0.0592,
+      "Invalid": 0,
+      "Invalid (%)": 0.0
+    }
+  ],
+  "completeness_9_mandatory_breakdown": [
+    {
+      "No": 1,
+      "Atribut_Wajib_Tabel_2_7": "occurrenceID",
+      "Jumlah_Terisi": 1550493,
+      "Persentase_Terisi (%)": 99.9196,
+      "Jumlah_Kosong_NULL": 1248,
+      "Persentase_Kosong (%)": 0.0804
+    },
+    {
+      "No": 2,
+      "Atribut_Wajib_Tabel_2_7": "scientificName",
+      "Jumlah_Terisi": 1551741,
+      "Persentase_Terisi (%)": 100.0,
+      "Jumlah_Kosong_NULL": 0,
+      "Persentase_Kosong (%)": 0.0
+    },
+    {
+      "No": 3,
+      "Atribut_Wajib_Tabel_2_7": "taxonRank",
+      "Jumlah_Terisi": 1551741,
+      "Persentase_Terisi (%)": 100.0,
+      "Jumlah_Kosong_NULL": 0,
+      "Persentase_Kosong (%)": 0.0
+    },
+    {
+      "No": 4,
+      "Atribut_Wajib_Tabel_2_7": "decimalLatitude",
+      "Jumlah_Terisi": 1548897,
+      "Persentase_Terisi (%)": 99.8167,
+      "Jumlah_Kosong_NULL": 2844,
+      "Persentase_Kosong (%)": 0.1833
+    },
+    {
+      "No": 5,
+      "Atribut_Wajib_Tabel_2_7": "decimalLongitude",
+      "Jumlah_Terisi": 1548897,
+      "Persentase_Terisi (%)": 99.8167,
+      "Jumlah_Kosong_NULL": 2844,
+      "Persentase_Kosong (%)": 0.1833
+    },
+    {
+      "No": 6,
+      "Atribut_Wajib_Tabel_2_7": "eventDate",
+      "Jumlah_Terisi": 1551741,
+      "Persentase_Terisi (%)": 100.0,
+      "Jumlah_Kosong_NULL": 0,
+      "Persentase_Kosong (%)": 0.0
+    },
+    {
+      "No": 7,
+      "Atribut_Wajib_Tabel_2_7": "basisOfRecord",
+      "Jumlah_Terisi": 1551741,
+      "Persentase_Terisi (%)": 100.0,
+      "Jumlah_Kosong_NULL": 0,
+      "Persentase_Kosong (%)": 0.0
+    },
+    {
+      "No": 8,
+      "Atribut_Wajib_Tabel_2_7": "publisher",
+      "Jumlah_Terisi": 1551741,
+      "Persentase_Terisi (%)": 100.0,
+      "Jumlah_Kosong_NULL": 0,
+      "Persentase_Kosong (%)": 0.0
+    },
+    {
+      "No": 9,
+      "Atribut_Wajib_Tabel_2_7": "recordedBy",
+      "Jumlah_Terisi": 1548680,
+      "Persentase_Terisi (%)": 99.8027,
+      "Jumlah_Kosong_NULL": 3061,
+      "Persentase_Kosong (%)": 0.1973
+    }
+  ],
+  "duplicate_breakdown": {
+    "UNIQUE": 1513586,
+    "DUP_EXACT": 38152,
+    "DUP_OCCURRENCE_ID": 0,
+    "DUP_CATALOG": 3
+  },
+  "duplicate_rule_totals": {
+    "dup_exact_non_null": 38152,
+    "dup_occurrenceID": 0,
+    "dup_catalog": 3,
+    "dup_union_total": 38155
+  },
+  "spatial_habitat_detail_breakdown": [
+    {
+      "Kategori_Detail_Spasial": "VALID_CLEAN_LAND",
+      "Status_Dimensi_VS": "VALID",
+      "Keterangan": "Daratan Indonesia (CLEAN_LAND)",
+      "Jumlah_Record": 1362085,
+      "Proporsi (%)": 87.7779
+    },
+    {
+      "Kategori_Detail_Spasial": "VALID_COASTAL_TOLERANCE_LE_1KM",
+      "Status_Dimensi_VS": "VALID",
+      "Keterangan": "Luar Daratan <= 1 km dari Pantai (CLEAN_COASTAL_TOLERANCE)",
+      "Jumlah_Record": 84109,
+      "Proporsi (%)": 5.4203
+    },
+    {
+      "Kategori_Detail_Spasial": "VALID_HABITAT_SUPPORTED_GT_1KM",
+      "Status_Dimensi_VS": "VALID",
+      "Keterangan": "Luar Daratan > 1 km & Habitat Spesies Sesuai (SUPPORTED)",
+      "Jumlah_Record": 97107,
+      "Proporsi (%)": 6.2579
+    },
+    {
+      "Kategori_Detail_Spasial": "INVALID_HABITAT_ANOMALY",
+      "Status_Dimensi_VS": "INVALID",
+      "Keterangan": "Luar Daratan > 1 km & Anomali Habitat Spesies (ANOMALY)",
+      "Jumlah_Record": 5393,
+      "Proporsi (%)": 0.3475
+    },
+    {
+      "Kategori_Detail_Spasial": "INVALID_UNVERIFIABLE_TAXON",
+      "Status_Dimensi_VS": "INVALID",
+      "Keterangan": "Luar Daratan > 1 km & Takson Tidak Terverifikasi (UNVERIFIABLE_TAXON)",
+      "Jumlah_Record": 76,
+      "Proporsi (%)": 0.0049
+    },
+    {
+      "Kategori_Detail_Spasial": "INVALID_GEOSPATIAL_ISSUE",
+      "Status_Dimensi_VS": "INVALID",
+      "Keterangan": "Memiliki Flag Isu Geospasial GBIF (hasGeospatialIssues=True)",
+      "Jumlah_Record": 6,
+      "Proporsi (%)": 0.0004
+    },
+    {
+      "Kategori_Detail_Spasial": "INVALID_OUTSIDE_BBOX",
+      "Status_Dimensi_VS": "INVALID",
+      "Keterangan": "Koordinat di Luar Bounding Box Indonesia",
+      "Jumlah_Record": 15,
+      "Proporsi (%)": 0.001
+    },
+    {
+      "Kategori_Detail_Spasial": "INVALID_NO_COORD",
+      "Status_Dimensi_VS": "INVALID",
+      "Keterangan": "Koordinat Kosong atau (0, 0)",
+      "Jumlah_Record": 2950,
+      "Proporsi (%)": 0.1901
+    }
+  ],
+  "vmt_detail_breakdown": [
+    {
+      "Kategori_Detail_VMT": "VALID_ISO_AND_METADATA",
+      "Status_Dimensi_VMT": "VALID",
+      "Keterangan": "Tanggal ISO 8601 valid, konsisten dengan year/month, serta basisOfRecord & publisher terisi",
+      "Jumlah_Record": 1550823,
+      "Proporsi (%)": 99.9408
+    },
+    {
+      "Kategori_Detail_VMT": "WARNING_PARTIAL_OR_INTERVAL_DATE",
+      "Status_Dimensi_VMT": "WARNING",
+      "Keterangan": "Tanggal parsial (YYYY / YYYY-MM) atau interval tanggal (verbatimEventDateRaw dipertahankan)",
+      "Jumlah_Record": 918,
+      "Proporsi (%)": 0.0592
+    },
+    {
+      "Kategori_Detail_VMT": "WARNING_AMBIGUOUS_SLASH_DATE",
+      "Status_Dimensi_VMT": "WARNING",
+      "Keterangan": "Tanggal format garis miring ambigu DD/MM vs MM/DD",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    },
+    {
+      "Kategori_Detail_VMT": "WARNING_YEAR_MONTH_MISMATCH",
+      "Status_Dimensi_VMT": "WARNING",
+      "Keterangan": "Ketidaksesuaian nilai kolom year/month terhadap tanggal eventDate",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    },
+    {
+      "Kategori_Detail_VMT": "WARNING_MISSING_PUBLISHER",
+      "Status_Dimensi_VMT": "WARNING",
+      "Keterangan": "Atribut publisher kosong meskipun tanggal dan basisOfRecord valid",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    },
+    {
+      "Kategori_Detail_VMT": "INVALID_MISSING_OR_UNPARSEABLE_DATE",
+      "Status_Dimensi_VMT": "INVALID",
+      "Keterangan": "Tanggal eventDate kosong atau tidak dapat dikenali",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    },
+    {
+      "Kategori_Detail_VMT": "INVALID_FUTURE_DATE",
+      "Status_Dimensi_VMT": "INVALID",
+      "Keterangan": "Tanggal observasi melebihi tanggal ekstraksi dataset",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    },
+    {
+      "Kategori_Detail_VMT": "INVALID_MISSING_BASIS_OF_RECORD",
+      "Status_Dimensi_VMT": "INVALID",
+      "Keterangan": "Atribut basisOfRecord kosong",
+      "Jumlah_Record": 0,
+      "Proporsi (%)": 0.0
+    }
+  ],
+  "routing_summary": [
+    {
+      "Status_Akhir_Record": "Clean",
+      "Target_Penyimpanan": "Clean Set (DuckDB & Parquet)",
+      "Jumlah_Record": 1501854,
+      "Proporsi (%)": 96.7851
+    },
+    {
+      "Status_Akhir_Record": "Warning",
+      "Target_Penyimpanan": "Clean Set (DuckDB & Parquet)",
+      "Jumlah_Record": 21,
+      "Proporsi (%)": 0.0014
+    },
+    {
+      "Status_Akhir_Record": "Quarantine",
+      "Target_Penyimpanan": "Quarantine Store (DuckDB & Parquet)",
+      "Jumlah_Record": 49866,
+      "Proporsi (%)": 3.2136
+    }
+  ],
+  "invalid_records_by_single_dimension": {
+    "Completeness": 5242,
+    "Uniqueness": 38155,
+    "Spatial": 8440,
+    "Taxonomy": 1776
+  },
+  "top_invalid_reasons_combinations": {
+    "Uniqueness": 37687,
+    "Spatial": 5203,
+    "Completeness;Spatial": 2980,
+    "Completeness": 2116,
+    "Taxonomy": 1218,
+    "Uniqueness;Taxonomy": 364,
+    "Completeness;Spatial;Taxonomy": 102,
+    "Uniqueness;Spatial": 99,
+    "Spatial;Taxonomy": 53,
+    "Completeness;Taxonomy": 39,
+    "Completeness;Uniqueness;Spatial": 3,
+    "Completeness;Uniqueness": 2
+  },
+  "before_vs_after_comparison_eq_2_7": [
+    {
+      "Kode": "L",
+      "Dimensi_Kualitas": "Kelengkapan (Completeness)",
+      "Baseline_Sebelum_ETL (%)": 99.6622,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 0.3378
+    },
+    {
+      "Kode": "U",
+      "Dimensi_Kualitas": "Keunikan (Uniqueness)",
+      "Baseline_Sebelum_ETL (%)": 97.7026,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 2.2974
+    },
+    {
+      "Kode": "VS",
+      "Dimensi_Kualitas": "Validitas Spasial (Spatial Validity)",
+      "Baseline_Sebelum_ETL (%)": 87.7779,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 12.2221
+    },
+    {
+      "Kode": "TRT",
+      "Dimensi_Kualitas": "Tingkat Resolusi Taksonomi (Catalogue of Life XR)",
+      "Baseline_Sebelum_ETL (%)": 92.4103,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 7.5897
+    },
+    {
+      "Kode": "VMT",
+      "Dimensi_Kualitas": "Validitas Metadata & Temporal",
+      "Baseline_Sebelum_ETL (%)": 94.4372,
+      "Sesudah_ETL_Clean_Set (%)": 100.0,
+      "Kenaikan_Delta_X (%)": 5.5628
+    }
+  ],
+  "clean_set_post_etl_metrics": {
+    "L_after": 100.0,
+    "U_after": 100.0,
+    "VS_after": 100.0,
+    "TRT_after": 100.0,
+    "VMT_after": 100.0,
+    "VMT_after_strict_iso": 99.9986
+  },
+  "consistency_checks": {
+    "tahap1_total_records": 1551741,
+    "tahap3_total_records": 1551741,
+    "tahap4_5_total_records": 1551741,
+    "clean_plus_quarantine_equals_total": true
+  }
+}

@@ -1,0 +1,10 @@
+No,Atribut_Wajib_Tabel_2_7,Jumlah_Terisi,Persentase_Terisi (%),Jumlah_Kosong_NULL,Persentase_Kosong (%)
+1,occurrenceID,1550493,99.9196,1248,0.0804
+2,scientificName,1551741,100.0,0,0.0
+3,taxonRank,1551741,100.0,0,0.0
+4,decimalLatitude,1548897,99.8167,2844,0.1833
+5,decimalLongitude,1548897,99.8167,2844,0.1833
+6,eventDate,1551741,100.0,0,0.0
+7,basisOfRecord,1551741,100.0,0,0.0
+8,publisher,1551741,100.0,0,0.0
+9,recordedBy,1548680,99.8027,3061,0.1973

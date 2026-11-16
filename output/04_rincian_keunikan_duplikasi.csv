@@ -1,0 +1,5 @@
+Kategori_Keunikan,Status_Dimensi_U,Keterangan,Jumlah_Record,Proporsi (%)
+UNIQUE,VALID,Record unik (kemunculan pertama/asli),1513586,97.5411
+DUP_EXACT,INVALID,"Duplikasi eksak 6 atribut non-NULL (acceptedTaxonKey/taxonKey, lat, lon, eventDate, recordedBy, publisher)",38152,2.4587
+DUP_OCCURRENCE_ID,INVALID,Duplikasi kunci occurrenceID (di luar duplikat eksak),0,0.0
+DUP_CATALOG,INVALID,Duplikasi kombinasi institutionCode + collectionCode + catalogNumber (di luar eksak & occurrenceID),3,0.0002

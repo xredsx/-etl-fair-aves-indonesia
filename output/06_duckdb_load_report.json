@@ -1,0 +1,512 @@
+{
+  "generated_at": "2026-11-16T09:52:09",
+  "clean": {
+    "label": "CLEAN",
+    "table": "occurrence_clean",
+    "rows": 1501875,
+    "cols_source": 57,
+    "cols": 41,
+    "loaded_columns": [
+      "gbifID",
+      "occurrenceID",
+      "datasetKey",
+      "basisOfRecord",
+      "occurrenceStatus",
+      "eventDate",
+      "year",
+      "month",
+      "countryCode",
+      "stateProvince",
+      "decimalLatitude",
+      "decimalLongitude",
+      "hasGeospatialIssues",
+      "scientificName",
+      "verbatimScientificName",
+      "taxonKey",
+      "acceptedTaxonKey",
+      "taxonomicStatus",
+      "taxonRank",
+      "family",
+      "genus",
+      "species",
+      "institutionCode",
+      "collectionCode",
+      "catalogNumber",
+      "recordedBy",
+      "publisher",
+      "license",
+      "verbatimEventDateRaw",
+      "eventDateParseStatus",
+      "matchType",
+      "matchedRank",
+      "matchedStatus",
+      "taxonomicMatchCategory",
+      "distanceToIndonesiaLandKm",
+      "spatialHabitatStatus",
+      "spatialHabitatSupportKm",
+      "spatial_validation_detail",
+      "vmt_validation_detail",
+      "status_metadata_temporal",
+      "record_routing_status"
+    ],
+    "dropped_columns": [
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "eventDateParsed",
+        "disatukan_ke_kolom": "eventDate",
+        "identik_persen": 100.0
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "hasCoordinate",
+        "disatukan_ke_kolom": "decimalLatitude",
+        "identik_persen": 100.0
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "acceptedScientificName",
+        "disatukan_ke_kolom": "scientificName",
+        "identik_persen": 100.0
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "matchedTaxonKey",
+        "disatukan_ke_kolom": "acceptedTaxonKey",
+        "identik_persen": 100.0
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "matchedAcceptedScientificName",
+        "disatukan_ke_kolom": "scientificName",
+        "identik_persen": 100.0
+      }
+    ],
+    "removed_columns": [
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "status_completeness",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "VALID"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "status_uniqueness",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "VALID"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "status_spatial",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "VALID"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "status_taxonomy",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "VALID"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "taxonomyValidationStatus",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "VALID"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "duplicate_type",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "UNIQUE"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "Invalid_Reasons",
+        "alasan": "isi konstan pada Clean Set",
+        "nilai_tunggal": "kosong semua"
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "spatialPreliminaryStatus",
+        "alasan": "kolom perantara/turunan",
+        "nilai_tunggal": ""
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "spatialLandClass",
+        "alasan": "kolom perantara/turunan",
+        "nilai_tunggal": ""
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "fuzzyEditDistance",
+        "alasan": "kolom perantara/turunan",
+        "nilai_tunggal": ""
+      },
+      {
+        "database": "CLEAN",
+        "kolom_dihapus": "isTaxonKeyConsistent",
+        "alasan": "kolom perantara/turunan",
+        "nilai_tunggal": ""
+      }
+    ],
+    "non_unique_source": 0,
+    "distinct_gbifID": 1501875,
+    "null_gbifID": 0,
+    "dup_occurrenceID": 0,
+    "final_parquet": "C:\\Users\\radit\\Skripsi\\ETL\\output\\final_parquet\\occurrence_clean.parquet",
+    "db_path": "C:\\Users\\radit\\Skripsi\\ETL\\output\\db\\clean_store_aves_indonesia.duckdb"
+  },
+  "quarantine": {
+    "label": "QUARANTINE",
+    "table": "occurrence_quarantine",
+    "rows": 49866,
+    "cols_source": 57,
+    "cols": 55,
+    "loaded_columns": [
+      "gbifID",
+      "occurrenceID",
+      "datasetKey",
+      "basisOfRecord",
+      "occurrenceStatus",
+      "eventDate",
+      "year",
+      "month",
+      "countryCode",
+      "stateProvince",
+      "decimalLatitude",
+      "decimalLongitude",
+      "hasGeospatialIssues",
+      "scientificName",
+      "verbatimScientificName",
+      "acceptedScientificName",
+      "taxonKey",
+      "acceptedTaxonKey",
+      "taxonomicStatus",
+      "taxonRank",
+      "family",
+      "genus",
+      "species",
+      "institutionCode",
+      "collectionCode",
+      "catalogNumber",
+      "recordedBy",
+      "publisher",
+      "license",
+      "verbatimEventDateRaw",
+      "eventDateParseStatus",
+      "matchedTaxonKey",
+      "matchedAcceptedScientificName",
+      "matchType",
+      "matchedRank",
+      "matchedStatus",
+      "taxonomicMatchCategory",
+      "taxonomyValidationStatus",
+      "fuzzyEditDistance",
+      "isTaxonKeyConsistent",
+      "spatialLandClass",
+      "distanceToIndonesiaLandKm",
+      "spatialPreliminaryStatus",
+      "spatialHabitatStatus",
+      "spatialHabitatSupportKm",
+      "spatial_validation_detail",
+      "vmt_validation_detail",
+      "status_completeness",
+      "status_uniqueness",
+      "status_spatial",
+      "status_taxonomy",
+      "status_metadata_temporal",
+      "duplicate_type",
+      "record_routing_status",
+      "Invalid_Reasons"
+    ],
+    "dropped_columns": [
+      {
+        "database": "QUARANTINE",
+        "kolom_dihapus": "eventDateParsed",
+        "disatukan_ke_kolom": "eventDate",
+        "identik_persen": 100.0
+      },
+      {
+        "database": "QUARANTINE",
+        "kolom_dihapus": "hasCoordinate",
+        "disatukan_ke_kolom": "decimalLatitude",
+        "identik_persen": 100.0
+      }
+    ],
+    "removed_columns": [],
+    "non_unique_source": 38155,
+    "distinct_gbifID": 49866,
+    "null_gbifID": 0,
+    "dup_occurrenceID": 0,
+    "final_parquet": "C:\\Users\\radit\\Skripsi\\ETL\\output\\final_parquet\\occurrence_quarantine.parquet",
+    "db_path": "C:\\Users\\radit\\Skripsi\\ETL\\output\\db\\quarantine_store_aves_indonesia.duckdb"
+  },
+  "checks": [
+    {
+      "pemeriksaan": "Total record Clean + Quarantine = total Tahap 4/5",
+      "hasil": "OK",
+      "keterangan": "dimuat 1,551,741 | Tahap 4/5 1,551,741"
+    },
+    {
+      "pemeriksaan": "Jumlah Clean Set sesuai laporan Tahap 4/5",
+      "hasil": "OK",
+      "keterangan": "dimuat 1,501,875 | laporan 1,501,875"
+    },
+    {
+      "pemeriksaan": "Jumlah Quarantine sesuai laporan Tahap 4/5",
+      "hasil": "OK",
+      "keterangan": "dimuat 49,866 | laporan 49,866"
+    },
+    {
+      "pemeriksaan": "Clean DB hanya berisi Clean/Warning",
+      "hasil": "OK",
+      "keterangan": "isi: {'Warning': 21, 'Clean': 1501854}"
+    },
+    {
+      "pemeriksaan": "Quarantine DB hanya berisi Quarantine",
+      "hasil": "OK",
+      "keterangan": "isi: {'Quarantine': 49866}"
+    },
+    {
+      "pemeriksaan": "gbifID unik di Clean",
+      "hasil": "OK",
+      "keterangan": "1,501,875 baris | 1,501,875 gbifID berbeda | 0 kosong"
+    },
+    {
+      "pemeriksaan": "gbifID unik di Quarantine",
+      "hasil": "OK",
+      "keterangan": "49,866 baris | 49,866 gbifID berbeda | 0 kosong"
+    },
+    {
+      "pemeriksaan": "Tidak ada gbifID yang sama di Clean dan Quarantine",
+      "hasil": "OK",
+      "keterangan": "irisan: 0 record"
+    },
+    {
+      "pemeriksaan": "occurrenceID tidak berulang di Clean",
+      "hasil": "OK",
+      "keterangan": "0 occurrenceID muncul lebih dari sekali"
+    },
+    {
+      "pemeriksaan": "Semua record Clean bertipe duplikat UNIQUE",
+      "hasil": "OK",
+      "keterangan": "0 record non-UNIQUE di Clean"
+    },
+    {
+      "pemeriksaan": "Kolom wajib di Clean tidak ada yang kosong",
+      "hasil": "OK",
+      "keterangan": "semua terisi"
+    },
+    {
+      "pemeriksaan": "Kolom ganda (DOUBLE) telah disatukan menjadi 1 kolom",
+      "hasil": "OK",
+      "keterangan": "CLEAN: 5 kolom ganda dihapus (57 -> 41 kolom) | QUARANTINE: 2 kolom ganda dihapus (57 -> 55 kolom)"
+    },
+    {
+      "pemeriksaan": "Kolom konstan/perantara dihapus dari Clean Set (Quarantine tetap lengkap)",
+      "hasil": "OK",
+      "keterangan": "CLEAN: 11 kolom dihapus | QUARANTINE: 0 kolom dihapus"
+    }
+  ],
+  "redundancy_audit": [
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "eventDate vs eventDateParsed",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'eventDate', hapus 'eventDateParsed'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "scientificName vs acceptedScientificName",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'scientificName', hapus 'acceptedScientificName'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "scientificName vs matchedAcceptedScientificName",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'scientificName', hapus 'matchedAcceptedScientificName'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "acceptedScientificName vs matchedAcceptedScientificName",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'scientificName', hapus 'matchedAcceptedScientificName'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "scientificName vs verbatimScientificName",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 1501813,
+      "identik_persen": 0.0041,
+      "keterangan": "berbeda",
+      "tindakan": "berbeda (tetap dimuat)"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "taxonKey vs acceptedTaxonKey",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 112066,
+      "identik_persen": 92.5383,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 112,066 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "taxonKey vs matchedTaxonKey",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 112066,
+      "identik_persen": 92.5383,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 112,066 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "acceptedTaxonKey vs matchedTaxonKey",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'acceptedTaxonKey', hapus 'matchedTaxonKey'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "hasCoordinate vs (lintang & bujur terisi)",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'decimalLatitude', hapus 'hasCoordinate'"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "year vs tahun dari eventDate",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 21,
+      "identik_persen": 99.9986,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 21 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "CLEAN",
+      "pasangan_kolom": "month vs bulan dari eventDate",
+      "jumlah_dibandingkan": 1501875,
+      "baris_berbeda": 3,
+      "identik_persen": 99.9998,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 3 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "eventDate vs eventDateParsed",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'eventDate', hapus 'eventDateParsed'"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "scientificName vs acceptedScientificName",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 1776,
+      "identik_persen": 96.4385,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 1,776 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "scientificName vs matchedAcceptedScientificName",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 44,
+      "identik_persen": 99.9118,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 44 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "acceptedScientificName vs matchedAcceptedScientificName",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 1776,
+      "identik_persen": 96.4385,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 1,776 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "scientificName vs verbatimScientificName",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 49621,
+      "identik_persen": 0.4913,
+      "keterangan": "berbeda",
+      "tindakan": "berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "taxonKey vs acceptedTaxonKey",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 5747,
+      "identik_persen": 88.4751,
+      "keterangan": "berbeda",
+      "tindakan": "berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "taxonKey vs matchedTaxonKey",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 4015,
+      "identik_persen": 91.9484,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 4,015 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "acceptedTaxonKey vs matchedTaxonKey",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 1776,
+      "identik_persen": 96.4385,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 1,776 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "hasCoordinate vs (lintang & bujur terisi)",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 0,
+      "identik_persen": 100.0,
+      "keterangan": "DOUBLE (isi identik)",
+      "tindakan": "DIJADIKAN 1 -> simpan 'decimalLatitude', hapus 'hasCoordinate'"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "year vs tahun dari eventDate",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 897,
+      "identik_persen": 98.2012,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 897 baris berbeda (tetap dimuat)"
+    },
+    {
+      "database": "QUARANTINE",
+      "pasangan_kolom": "month vs bulan dari eventDate",
+      "jumlah_dibandingkan": 49866,
+      "baris_berbeda": 127,
+      "identik_persen": 99.7453,
+      "keterangan": "hampir sama",
+      "tindakan": "hampir sama, 127 baris berbeda (tetap dimuat)"
+    }
+  ],
+  "adjustment_notes": []
+}

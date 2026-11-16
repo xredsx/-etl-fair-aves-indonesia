@@ -1,0 +1,209 @@
+{
+  "metadata_schema": "FAIR-DataCite-DarwinCore-v1.0",
+  "generated_at": "2026-11-12T11:39:37",
+  "F1_persistent_identifier": {
+    "dataset_id": "urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+    "sha256_clean_parquet": "12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+    "sha256_quarantine_parquet": "33aa4c115faffbd5dc3f4e96348d8ef574da2c271a0d6aa3ccee1bd9e102bef6",
+    "github_repository_url": null,
+    "github_commit_sha": null
+  },
+  "F2_R1_descriptive_metadata": {
+    "title": "Dataset Kurasi Kemunculan Burung (Aves) Indonesia Berstandar Darwin Core dan FAIR",
+    "description": "Dataset hasil pipeline ETL 6 tahap dari Global Biodiversity Information Facility (GBIF) berformat Simple CSV untuk kelas Aves di wilayah Indonesia, dilengkapi validasi 5 dimensi kualitas data (kelengkapan, keunikan, spasial-habitat, resolusi taksonomi Catalogue of Life XR, dan metadata-temporal) serta pemisahan Clean Set dan Quarantine Store.",
+    "created_date": "2026-11-12",
+    "taxonomic_coverage": {
+      "kingdom": "Animalia",
+      "class": "Aves",
+      "distinct_families": 126,
+      "distinct_genera": 560,
+      "distinct_species_scientificName": 3156,
+      "reference_backbone": "Catalogue of Life eXtended Release (COL XR, checklistKey=7ddf754f-d193-4cc9-b351-99906754a03b) via GBIF Species Match API v2"
+    },
+    "spatial_coverage": {
+      "country": "Indonesia (ID)",
+      "min_latitude": -11.424224,
+      "max_latitude": 5.99363,
+      "min_longitude": 95.06659,
+      "max_longitude": 141.016541,
+      "distinct_provinces": 69
+    },
+    "temporal_coverage": {
+      "min_eventDate_iso8601": "2000-01-01",
+      "max_eventDate_iso8601": "2026-11-01",
+      "min_year": 2000,
+      "max_year": 2026
+    },
+    "record_counts": {
+      "total_records_processed": 1551741,
+      "clean_set_records": 1501875,
+      "clean_routing_breakdown": {
+        "Warning": 21,
+        "Clean": 1501854
+      },
+      "quarantine_store_records": 49866
+    },
+    "data_quality_before_vs_after_etl": [
+      {
+        "Kode": "L",
+        "Dimensi_Kualitas": "Kelengkapan (Completeness)",
+        "Baseline_Sebelum_ETL (%)": 99.6622,
+        "Sesudah_ETL_Clean_Set (%)": 100.0,
+        "Kenaikan_Delta_X (%)": 0.3378
+      },
+      {
+        "Kode": "U",
+        "Dimensi_Kualitas": "Keunikan (Uniqueness)",
+        "Baseline_Sebelum_ETL (%)": 97.7026,
+        "Sesudah_ETL_Clean_Set (%)": 100.0,
+        "Kenaikan_Delta_X (%)": 2.2974
+      },
+      {
+        "Kode": "VS",
+        "Dimensi_Kualitas": "Validitas Spasial (Spatial Validity)",
+        "Baseline_Sebelum_ETL (%)": 87.7779,
+        "Sesudah_ETL_Clean_Set (%)": 100.0,
+        "Kenaikan_Delta_X (%)": 12.2221
+      },
+      {
+        "Kode": "TRT",
+        "Dimensi_Kualitas": "Tingkat Resolusi Taksonomi (Catalogue of Life XR)",
+        "Baseline_Sebelum_ETL (%)": 92.4103,
+        "Sesudah_ETL_Clean_Set (%)": 100.0,
+        "Kenaikan_Delta_X (%)": 7.5897
+      },
+      {
+        "Kode": "VMT",
+        "Dimensi_Kualitas": "Validitas Metadata & Temporal",
+        "Baseline_Sebelum_ETL (%)": 94.4372,
+        "Sesudah_ETL_Clean_Set (%)": 100.0,
+        "Kenaikan_Delta_X (%)": 5.5628
+      }
+    ]
+  },
+  "F3_data_identifiers_and_distributions": {
+    "described_dataset_id": "urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+    "distributions": [
+      {
+        "artifact_role": "Clean Set DuckDB Database",
+        "file_name": "clean_store_aves_indonesia.duckdb",
+        "table_name": "occurrence_clean",
+        "format": "DuckDB",
+        "records": 1501875,
+        "columns": 52
+      },
+      {
+        "artifact_role": "Clean Set Final Parquet",
+        "file_name": "occurrence_clean.parquet",
+        "format": "Apache Parquet (ZSTD)",
+        "sha256": "12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+        "records": 1501875
+      },
+      {
+        "artifact_role": "Quarantine Store DuckDB Database",
+        "file_name": "quarantine_store_aves_indonesia.duckdb",
+        "table_name": "occurrence_quarantine",
+        "format": "DuckDB",
+        "records": 49866
+      },
+      {
+        "artifact_role": "Quarantine Store Final Parquet",
+        "file_name": "occurrence_quarantine.parquet",
+        "format": "Apache Parquet (ZSTD)",
+        "sha256": "33aa4c115faffbd5dc3f4e96348d8ef574da2c271a0d6aa3ccee1bd9e102bef6",
+        "records": 49866
+      }
+    ]
+  },
+  "A1_access_protocol_and_github_status": {
+    "access_protocol": "Local File System (Belum Diunggah ke GitHub)",
+    "github_uploaded_and_verified": false,
+    "github_url": null,
+    "http_status_code": null,
+    "open_free_access": false,
+    "detection_summary": "BELUM DIUPLOAD KE GITHUB (Tidak ditemukan remote .git GitHub maupun GITHUB_REPO_URL_MANUAL)"
+  },
+  "I1_I2_I3_interoperability_and_standards": {
+    "machine_readable_formats": [
+      "Apache Parquet (ZSTD)",
+      "DuckDB Relational Table",
+      "JSON Metadata"
+    ],
+    "community_standard": "Darwin Core (DwC) Simple Darwin Core",
+    "vocabulary_authorities": [
+      "Darwin Core Terms (tdwg.org)",
+      "Catalogue of Life eXtended Release (COL XR, checklistKey=7ddf754f-d193-4cc9-b351-99906754a03b)"
+    ],
+    "darwin_core_columns_active": [
+      "gbifID",
+      "occurrenceID",
+      "datasetKey",
+      "basisOfRecord",
+      "occurrenceStatus",
+      "eventDate",
+      "year",
+      "month",
+      "countryCode",
+      "stateProvince",
+      "decimalLatitude",
+      "decimalLongitude",
+      "hasGeospatialIssues",
+      "scientificName",
+      "verbatimScientificName",
+      "taxonKey",
+      "acceptedTaxonKey",
+      "taxonomicStatus",
+      "taxonRank",
+      "family",
+      "genus",
+      "species",
+      "institutionCode",
+      "collectionCode",
+      "catalogNumber",
+      "recordedBy",
+      "publisher",
+      "license"
+    ],
+    "darwin_core_columns_merged_deduplicated": [
+      "hasCoordinate",
+      "acceptedScientificName"
+    ],
+    "qualified_references_coverage": {
+      "taxonKey_populated_records": 1501875,
+      "taxonKey_coverage_pct": 100.0,
+      "datasetKey_populated_records": 1501875,
+      "datasetKey_coverage_pct": 100.0
+    }
+  },
+  "R1_1_license_and_usage_terms": {
+    "dataset_curation_license": "CC-BY-4.0 (mengikuti atribusi sumber GBIF pada tiap record)",
+    "record_level_license_column": "license",
+    "record_level_license_populated_pct": 100.0,
+    "record_level_license_distribution": {
+      "CC_BY_4_0": 1380679,
+      "CC_BY_NC_4_0": 117036,
+      "CC0_1_0": 4160
+    }
+  },
+  "R1_2_provenance": {
+    "primary_source": "Global Biodiversity Information Facility (GBIF) Occurrence Download (Simple CSV, Taxonomy: Catalogue of Life) - Class Aves, Country ID",
+    "record_level_provenance_columns": [
+      "gbifID",
+      "occurrenceID",
+      "datasetKey",
+      "publisher",
+      "institutionCode",
+      "collectionCode",
+      "catalogNumber",
+      "recordedBy"
+    ],
+    "etl_pipeline_stages": [
+      "Tahap 1: Ekstraksi & Ingesti Data Mentah GBIF Simple CSV Aves Indonesia (26 Atribut Target + 3 Kolom Turunan: hasCoordinate, hasGeospatialIssues, publisher)",
+      "Tahap 2: Harmonisasi Skema Darwin Core, Normalisasi Temporal ISO 8601 (eventDate), & Klasifikasi Spasial Daratan/Pesisir Indonesia",
+      "Tahap 3: Resolusi Taksonomi terhadap Catalogue of Life (COL XR, checklistKey=7ddf754f-d193-4cc9-b351-99906754a03b) via GBIF Species Match API v2, Pembentukan acceptedScientificName/acceptedTaxonKey/taxonomicStatus, & Evaluasi Habitat Spasial Spesies",
+      "Tahap 4: Evaluasi Multi-Dimensi Kualitas Data (Completeness, Uniqueness, Spatial, Taxonomy, Metadata-Temporal)",
+      "Tahap 5: Routing Record Otomatis ke Clean Set (Clean & Warning) dan Quarantine Store beserta Invalid_Reasons",
+      "Tahap 6: Deduplikasi Kolom Identik, Pemuatan ke DuckDB, Pembuatan Kamus Data (data_dictionary), & Ekspor Parquet ZSTD"
+    ]
+  }
+}

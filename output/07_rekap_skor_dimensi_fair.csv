@@ -1,0 +1,5 @@
+﻿Dimensi_FAIR,Jumlah_Indikator,Total_Bobot (Sum w_i),Total_Skor_Tertimbang (Sum w_i*s_i),Skor_Dimensi (0-1),Skor_Dimensi (%)
+Findable (F),3,9,9.0,1.0,100.0
+Accessible (A),2,5,0.0,0.0,0.0
+Interoperable (I),3,6,6.0,1.0,100.0
+Reusable (R),4,11,11.0,1.0,100.0
