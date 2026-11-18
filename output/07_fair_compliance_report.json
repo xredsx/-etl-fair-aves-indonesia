@@ -1,29 +1,29 @@
 {
-  "evaluated_at": "2026-11-12T11:39:38",
+  "evaluated_at": "2026-11-16T11:08:10",
   "github_detection": {
-    "git_repo_detected": false,
-    "git_root": null,
-    "remote_origin_url": null,
-    "github_https_url": null,
-    "github_owner_repo": null,
-    "local_commit_sha": null,
-    "pushed_to_remote": false,
+    "git_repo_detected": true,
+    "git_root": "C:\\Users\\radit\\Skripsi\\ETL",
+    "remote_origin_url": "https://github.com/xredsx/-etl-fair-aves-indonesia.git",
+    "github_https_url": "https://github.com/xredsx/-etl-fair-aves-indonesia",
+    "github_owner_repo": "xredsx/-etl-fair-aves-indonesia",
+    "local_commit_sha": "715cd8d10acd1325fc36f435914afeee8cfa3d4d",
+    "pushed_to_remote": true,
     "http_accessible": false,
     "http_status_code": null,
     "is_open_free_access": false,
     "github_has_files_online": false,
-    "detection_method": "Belum terdeteksi",
-    "detail_message": "BELUM DIUPLOAD KE GITHUB (Tidak ditemukan remote .git GitHub maupun GITHUB_REPO_URL_MANUAL)"
+    "detection_method": "Otomatis dari .git (C:\\Users\\radit\\Skripsi\\ETL)",
+    "detail_message": "Terdeteksi remote GitHub & branch remote (https://github.com/xredsx/-etl-fair-aves-indonesia), status verifikasi HTTP: Offline/Belum dicek"
   },
   "formula_2_9": "Overall FAIR Score = (FAIR_F + FAIR_A + FAIR_I + FAIR_R) / 4",
   "dimension_scores": {
     "FAIR_F": 1.0,
-    "FAIR_A": 0.0,
+    "FAIR_A": 1.0,
     "FAIR_I": 1.0,
     "FAIR_R": 1.0
   },
-  "overall_fair_score_0_to_1": 0.75,
-  "overall_fair_score_pct": 75.0,
+  "overall_fair_score_0_to_1": 1.0,
+  "overall_fair_score_pct": 100.0,
   "projected_overall_fair_score_if_github_uploaded_pct": 100.0,
   "before_vs_after_quality_delta_x": [
     {
@@ -71,7 +71,7 @@
       "Prioritas": "Essential",
       "Bobot (w_i)": 3,
       "Skor_Pemenuhan (s_i)": 1.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "Dataset memiliki identifier unik berbasis SHA-256 (urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5) pada 07_dataset_metadata_fair.json serta gbifID & occurrenceID unik pada 100% (1,501,875) record.",
+      "Bukti_Operasional_Keluaran_Pipeline": "Dataset memiliki identifier unik berbasis SHA-256 (https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995) pada 07_dataset_metadata_fair.json serta gbifID & occurrenceID unik pada 100% (1,501,875) record.",
       "Skor_Tertimbang (w_i * s_i)": 3.0,
       "Status_Pemenuhan": "Terpenuhi (100%)"
     },
@@ -95,7 +95,7 @@
       "Prioritas": "Essential",
       "Bobot (w_i)": 3,
       "Skor_Pemenuhan (s_i)": 1.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "Metadata mencantumkan eksplisit described_dataset_id (urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5) beserta nama file fisik (clean_store_aves_indonesia.duckdb, occurrence_clean.parquet) dan hash SHA-256 masing-masing artefak.",
+      "Bukti_Operasional_Keluaran_Pipeline": "Metadata mencantumkan eksplisit described_dataset_id (https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995) beserta nama file fisik (clean_store_aves_indonesia.duckdb, occurrence_clean.parquet) dan hash SHA-256 masing-masing artefak.",
       "Skor_Tertimbang (w_i * s_i)": 3.0,
       "Status_Pemenuhan": "Terpenuhi (100%)"
     },
@@ -106,10 +106,10 @@
       "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset dapat diakses melalui identifier menggunakan protokol standar seperti HTTP/HTTPS.",
       "Prioritas": "Essential",
       "Bobot (w_i)": 3,
-      "Skor_Pemenuhan (s_i)": 0.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "BELUM TERPENUHI (Skor 0.0): Deteksi otomatis menunjukkan dataset masih berada di penyimpanan lokal dan belum diunggah (push) ke repositori daring berbasis HTTP/HTTPS (GitHub).",
-      "Skor_Tertimbang (w_i * s_i)": 0.0,
-      "Status_Pemenuhan": "Belum Terpenuhi (0%)"
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Terdeteksi remote GitHub melalui protokol HTTPS (https://github.com/xredsx/-etl-fair-aves-indonesia) dengan commit lokal yang telah di-push (715cd8d10a).",
+      "Skor_Tertimbang (w_i * s_i)": 3.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
     },
     {
       "Dimensi": "Accessible (A)",
@@ -118,10 +118,10 @@
       "Operasionalisasi_dan_Kriteria_Pemenuhan": "Dataset dapat diakses melalui protokol yang tidak memerlukan pembayaran.",
       "Prioritas": "Important",
       "Bobot (w_i)": 2,
-      "Skor_Pemenuhan (s_i)": 0.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "BELUM TERPENUHI (Skor 0.0): Karena dataset belum diunggah ke GitHub publik, akses protokol terbuka bebas biaya secara daring belum aktif.",
-      "Skor_Tertimbang (w_i * s_i)": 0.0,
-      "Status_Pemenuhan": "Belum Terpenuhi (0%)"
+      "Skor_Pemenuhan (s_i)": 1.0,
+      "Bukti_Operasional_Keluaran_Pipeline": "Repositori menggunakan layanan terbuka GitHub (https://github.com/xredsx/-etl-fair-aves-indonesia) yang bebas biaya akses (open/free access).",
+      "Skor_Tertimbang (w_i * s_i)": 2.0,
+      "Status_Pemenuhan": "Terpenuhi (100%)"
     },
     {
       "Dimensi": "Interoperable (I)",
@@ -131,7 +131,7 @@
       "Prioritas": "Important",
       "Bobot (w_i)": 2,
       "Skor_Pemenuhan (s_i)": 1.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "Tersimpan dalam format terstruktur mesin Apache Parquet ZSTD (occurrence_clean.parquet) dan tabel relasional DuckDB (clean_store_aves_indonesia.duckdb -> occurrence_clean, 52 kolom) yang mengacu pada Darwin Core.",
+      "Bukti_Operasional_Keluaran_Pipeline": "Tersimpan dalam format terstruktur mesin Apache Parquet ZSTD (occurrence_clean.parquet) dan tabel relasional DuckDB (clean_store_aves_indonesia.duckdb -> occurrence_clean, 41 kolom) yang mengacu pada Darwin Core.",
       "Skor_Tertimbang (w_i * s_i)": 2.0,
       "Status_Pemenuhan": "Terpenuhi (100%)"
     },
@@ -167,7 +167,7 @@
       "Prioritas": "Essential",
       "Bobot (w_i)": 3,
       "Skor_Pemenuhan (s_i)": 1.0,
-      "Bukti_Operasional_Keluaran_Pipeline": "Metadata 07_dataset_metadata_fair.json memuat deskripsi kurasi, cakupan taksonomi/spasial/temporal, jumlah record (1,501,875 Clean & 49,866 Quarantine), dan tanggal pembuatan (2026-11-12).",
+      "Bukti_Operasional_Keluaran_Pipeline": "Metadata 07_dataset_metadata_fair.json memuat deskripsi kurasi, cakupan taksonomi/spasial/temporal, jumlah record (1,501,875 Clean & 49,866 Quarantine), dan tanggal pembuatan (2026-11-16).",
       "Skor_Tertimbang (w_i * s_i)": 3.0,
       "Status_Pemenuhan": "Terpenuhi (100%)"
     },

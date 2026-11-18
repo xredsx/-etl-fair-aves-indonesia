@@ -1,17 +1,17 @@
 {
   "metadata_schema": "FAIR-DataCite-DarwinCore-v1.0",
-  "generated_at": "2026-11-12T11:39:37",
+  "generated_at": "2026-11-16T11:08:10",
   "F1_persistent_identifier": {
-    "dataset_id": "urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
-    "sha256_clean_parquet": "12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+    "dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995",
+    "sha256_clean_parquet": "9919baae87ecc995daa127e25a6aa3566cc03a9cb4e786fb21188761db66967a",
     "sha256_quarantine_parquet": "33aa4c115faffbd5dc3f4e96348d8ef574da2c271a0d6aa3ccee1bd9e102bef6",
-    "github_repository_url": null,
-    "github_commit_sha": null
+    "github_repository_url": "https://github.com/xredsx/-etl-fair-aves-indonesia",
+    "github_commit_sha": "715cd8d10acd1325fc36f435914afeee8cfa3d4d"
   },
   "F2_R1_descriptive_metadata": {
     "title": "Dataset Kurasi Kemunculan Burung (Aves) Indonesia Berstandar Darwin Core dan FAIR",
     "description": "Dataset hasil pipeline ETL 6 tahap dari Global Biodiversity Information Facility (GBIF) berformat Simple CSV untuk kelas Aves di wilayah Indonesia, dilengkapi validasi 5 dimensi kualitas data (kelengkapan, keunikan, spasial-habitat, resolusi taksonomi Catalogue of Life XR, dan metadata-temporal) serta pemisahan Clean Set dan Quarantine Store.",
-    "created_date": "2026-11-12",
+    "created_date": "2026-11-16",
     "taxonomic_coverage": {
       "kingdom": "Animalia",
       "class": "Aves",
@@ -82,7 +82,7 @@
     ]
   },
   "F3_data_identifiers_and_distributions": {
-    "described_dataset_id": "urn:sha256:aves-indonesia-clean:12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+    "described_dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995",
     "distributions": [
       {
         "artifact_role": "Clean Set DuckDB Database",
@@ -90,13 +90,13 @@
         "table_name": "occurrence_clean",
         "format": "DuckDB",
         "records": 1501875,
-        "columns": 52
+        "columns": 41
       },
       {
         "artifact_role": "Clean Set Final Parquet",
         "file_name": "occurrence_clean.parquet",
         "format": "Apache Parquet (ZSTD)",
-        "sha256": "12a5e3fade7ee401ac9786b8cfe03045d91fbfd6fe9d4fbfb560a30b1bbbe1b5",
+        "sha256": "9919baae87ecc995daa127e25a6aa3566cc03a9cb4e786fb21188761db66967a",
         "records": 1501875
       },
       {
@@ -118,10 +118,10 @@
   "A1_access_protocol_and_github_status": {
     "access_protocol": "Local File System (Belum Diunggah ke GitHub)",
     "github_uploaded_and_verified": false,
-    "github_url": null,
+    "github_url": "https://github.com/xredsx/-etl-fair-aves-indonesia",
     "http_status_code": null,
     "open_free_access": false,
-    "detection_summary": "BELUM DIUPLOAD KE GITHUB (Tidak ditemukan remote .git GitHub maupun GITHUB_REPO_URL_MANUAL)"
+    "detection_summary": "Terdeteksi remote GitHub & branch remote (https://github.com/xredsx/-etl-fair-aves-indonesia), status verifikasi HTTP: Offline/Belum dicek"
   },
   "I1_I2_I3_interoperability_and_standards": {
     "machine_readable_formats": [
