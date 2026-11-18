@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T07:33:44",
+  "generated_at": "2026-11-18T19:55:13",
   "physical_lines_minus_header": 1551741,
   "total_records": 1551741,
   "skipped_malformed_lines": 0,
@@ -22,7 +22,7 @@
     "L": 99.6622,
     "U": 97.7026,
     "VS": 87.7779,
-    "TRT": 99.8855,
+    "TRT": null,
     "VMT": 94.4372
   },
   "baseline_details_with_warning_excluded": {
@@ -47,7 +47,6 @@
       "VALID_ISO_STRICT": 1465421,
       "WARNING_PARTIAL_OR_INTERVAL": 918
     },
-    "vmt_inconsistent_year_month_records": 0,
-    "i_t_unstandardized_or_unresolved_taxonomy": 1776
+    "vmt_inconsistent_year_month_records": 0
   }
 }

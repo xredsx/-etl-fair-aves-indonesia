@@ -1,7 +1,5 @@
 # Pipeline ETL Berbasis FAIR untuk Integrasi Data Biodiversitas dari GBIF: Studi Kasus Aves Indonesia
 
-Repositori ini memuat skrip *pipeline* ETL (*Extract, Transform, Load*), kamus data, dokumen metadata berstandar **FAIR**, serta keluaran akhir basis data **DuckDB** dan **Apache Parquet** untuk penelitian skripsi:
-
 - **Judul**: *Rancang Bangun Pipeline ETL Berbasis FAIR untuk Integrasi Data Biodiversitas dari GBIF: Studi Kasus Aves Indonesia*
 - **Peneliti**: Raditya Sajid (Program Studi S1 Sains Data, Departemen Statistika, FMIPA Universitas Brawijaya)
 - **Sumber Data**: Global Biodiversity Information Facility (GBIF) — Kelas *Aves* di Indonesia (`https://doi.org/10.15468/dl.w5dmpc`)

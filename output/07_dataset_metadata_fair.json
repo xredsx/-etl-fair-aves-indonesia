@@ -1,17 +1,17 @@
 {
   "metadata_schema": "FAIR-DataCite-DarwinCore-v1.0",
-  "generated_at": "2026-11-16T11:08:10",
+  "generated_at": "2026-11-18T22:33:39",
   "F1_persistent_identifier": {
-    "dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995",
+    "dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/20ac520b0f#sha256:9919baae87ecc995",
     "sha256_clean_parquet": "9919baae87ecc995daa127e25a6aa3566cc03a9cb4e786fb21188761db66967a",
     "sha256_quarantine_parquet": "33aa4c115faffbd5dc3f4e96348d8ef574da2c271a0d6aa3ccee1bd9e102bef6",
     "github_repository_url": "https://github.com/xredsx/-etl-fair-aves-indonesia",
-    "github_commit_sha": "715cd8d10acd1325fc36f435914afeee8cfa3d4d"
+    "github_commit_sha": "20ac520b0fc9868a5dded8e7569baeca2ac5d2b0"
   },
   "F2_R1_descriptive_metadata": {
     "title": "Dataset Kurasi Kemunculan Burung (Aves) Indonesia Berstandar Darwin Core dan FAIR",
-    "description": "Dataset hasil pipeline ETL 6 tahap dari Global Biodiversity Information Facility (GBIF) berformat Simple CSV untuk kelas Aves di wilayah Indonesia, dilengkapi validasi 5 dimensi kualitas data (kelengkapan, keunikan, spasial-habitat, resolusi taksonomi Catalogue of Life XR, dan metadata-temporal) serta pemisahan Clean Set dan Quarantine Store.",
-    "created_date": "2026-11-16",
+    "description": "Dataset hasil pipeline ETL 6 tahap dari Global Biodiversity Information Facility (GBIF) berformat Simple CSV untuk kelas Aves di wilayah Indonesia, dilengkapi validasi 5 dimensi kualitas data serta pemisahan Clean Set dan Quarantine Store.",
+    "created_date": "2026-11-18",
     "taxonomic_coverage": {
       "kingdom": "Animalia",
       "class": "Aves",
@@ -38,8 +38,8 @@
       "total_records_processed": 1551741,
       "clean_set_records": 1501875,
       "clean_routing_breakdown": {
-        "Warning": 21,
-        "Clean": 1501854
+        "Clean": 1501854,
+        "Warning": 21
       },
       "quarantine_store_records": 49866
     },
@@ -82,7 +82,7 @@
     ]
   },
   "F3_data_identifiers_and_distributions": {
-    "described_dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/715cd8d10a#sha256:9919baae87ecc995",
+    "described_dataset_id": "https://github.com/xredsx/-etl-fair-aves-indonesia/tree/20ac520b0f#sha256:9919baae87ecc995",
     "distributions": [
       {
         "artifact_role": "Clean Set DuckDB Database",
@@ -121,7 +121,7 @@
     "github_url": "https://github.com/xredsx/-etl-fair-aves-indonesia",
     "http_status_code": null,
     "open_free_access": false,
-    "detection_summary": "Terdeteksi remote GitHub & branch remote (https://github.com/xredsx/-etl-fair-aves-indonesia), status verifikasi HTTP: Offline/Belum dicek"
+    "detection_summary": "Terdeteksi remote GitHub (https://github.com/xredsx/-etl-fair-aves-indonesia), status HTTP: None"
   },
   "I1_I2_I3_interoperability_and_standards": {
     "machine_readable_formats": [
@@ -198,12 +198,12 @@
       "recordedBy"
     ],
     "etl_pipeline_stages": [
-      "Tahap 1: Ekstraksi & Ingesti Data Mentah GBIF Simple CSV Aves Indonesia (26 Atribut Target + 3 Kolom Turunan: hasCoordinate, hasGeospatialIssues, publisher)",
-      "Tahap 2: Harmonisasi Skema Darwin Core, Normalisasi Temporal ISO 8601 (eventDate), & Klasifikasi Spasial Daratan/Pesisir Indonesia",
-      "Tahap 3: Resolusi Taksonomi terhadap Catalogue of Life (COL XR, checklistKey=7ddf754f-d193-4cc9-b351-99906754a03b) via GBIF Species Match API v2, Pembentukan acceptedScientificName/acceptedTaxonKey/taxonomicStatus, & Evaluasi Habitat Spasial Spesies",
-      "Tahap 4: Evaluasi Multi-Dimensi Kualitas Data (Completeness, Uniqueness, Spatial, Taxonomy, Metadata-Temporal)",
-      "Tahap 5: Routing Record Otomatis ke Clean Set (Clean & Warning) dan Quarantine Store beserta Invalid_Reasons",
-      "Tahap 6: Deduplikasi Kolom Identik, Pemuatan ke DuckDB, Pembuatan Kamus Data (data_dictionary), & Ekspor Parquet ZSTD"
+      "Tahap 1: Ekstraksi & Ingesti Data Mentah GBIF Simple CSV Aves Indonesia",
+      "Tahap 2: Harmonisasi Skema Darwin Core, Normalisasi Temporal ISO 8601, & Klasifikasi Spasial Daratan/Pesisir",
+      "Tahap 3: Resolusi Taksonomi Catalogue of Life (COL XR, checklistKey=7ddf754f-d193-4cc9-b351-99906754a03b) & Evaluasi Habitat Spasial Spesies",
+      "Tahap 4: Evaluasi Multi-Dimensi Kualitas Data (L, U, VS, TRT, VMT)",
+      "Tahap 5: Routing Record Otomatis ke Clean Set dan Quarantine Store beserta Invalid_Reasons",
+      "Tahap 6: Deduplikasi Kolom Identik, Pemuatan ke DuckDB, Pembuatan Kamus Data, & Ekspor Parquet ZSTD"
     ]
   }
 }

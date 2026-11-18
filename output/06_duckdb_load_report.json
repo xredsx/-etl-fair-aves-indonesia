@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T09:52:09",
+  "generated_at": "2026-11-18T21:13:57",
   "clean": {
     "label": "CLEAN",
     "table": "occurrence_clean",
@@ -270,12 +270,12 @@
     {
       "pemeriksaan": "gbifID unik di Clean",
       "hasil": "OK",
-      "keterangan": "1,501,875 baris | 1,501,875 gbifID berbeda | 0 kosong"
+      "keterangan": "1,501,875 baris | 1,501,875 unik"
     },
     {
       "pemeriksaan": "gbifID unik di Quarantine",
       "hasil": "OK",
-      "keterangan": "49,866 baris | 49,866 gbifID berbeda | 0 kosong"
+      "keterangan": "49,866 baris | 49,866 unik"
     },
     {
       "pemeriksaan": "Tidak ada gbifID yang sama di Clean dan Quarantine",
@@ -285,12 +285,12 @@
     {
       "pemeriksaan": "occurrenceID tidak berulang di Clean",
       "hasil": "OK",
-      "keterangan": "0 occurrenceID muncul lebih dari sekali"
+      "keterangan": "0 duplikat"
     },
     {
       "pemeriksaan": "Semua record Clean bertipe duplikat UNIQUE",
       "hasil": "OK",
-      "keterangan": "0 record non-UNIQUE di Clean"
+      "keterangan": "0 non-UNIQUE"
     },
     {
       "pemeriksaan": "Kolom wajib di Clean tidak ada yang kosong",
@@ -300,12 +300,12 @@
     {
       "pemeriksaan": "Kolom ganda (DOUBLE) telah disatukan menjadi 1 kolom",
       "hasil": "OK",
-      "keterangan": "CLEAN: 5 kolom ganda dihapus (57 -> 41 kolom) | QUARANTINE: 2 kolom ganda dihapus (57 -> 55 kolom)"
+      "keterangan": "CLEAN: 57->41 kolom | QUARANTINE: 57->55 kolom"
     },
     {
-      "pemeriksaan": "Kolom konstan/perantara dihapus dari Clean Set (Quarantine tetap lengkap)",
+      "pemeriksaan": "Kolom konstan/perantara dihapus dari Clean Set",
       "hasil": "OK",
-      "keterangan": "CLEAN: 11 kolom dihapus | QUARANTINE: 0 kolom dihapus"
+      "keterangan": "CLEAN: 11 dihapus"
     }
   ],
   "redundancy_audit": [

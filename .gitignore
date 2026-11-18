@@ -1,4 +1,4 @@
-# Abaikan file CSV mentah dan Parquet perantara Tahap 1-5 agar tidak melebihi batas 100 MB GitHub
+# Abaikan CSV mentah & Parquet perantara Tahap 1-5 agar tidak melebihi batas 100 MB GitHub
 *.csv
 !output/*.csv
 *.zip
