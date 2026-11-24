@@ -1,9 +1,0 @@
-Kategori_Detail_Spasial,Status_Dimensi_VS,Keterangan,Jumlah_Record,Proporsi (%)
-VALID_CLEAN_LAND,VALID,Daratan Indonesia (CLEAN_LAND),1362085,87.7779
-VALID_COASTAL_TOLERANCE_LE_1KM,VALID,Luar Daratan <= 1 km dari Pantai (CLEAN_COASTAL_TOLERANCE),84109,5.4203
-VALID_HABITAT_SUPPORTED_GT_1KM,VALID,Luar Daratan > 1 km & Habitat Spesies Sesuai (SUPPORTED),97107,6.2579
-INVALID_HABITAT_ANOMALY,INVALID,Luar Daratan > 1 km & Anomali Habitat Spesies (ANOMALY),5393,0.3475
-INVALID_UNVERIFIABLE_TAXON,INVALID,Luar Daratan > 1 km & Takson Tidak Terverifikasi (UNVERIFIABLE_TAXON),76,0.0049
-INVALID_GEOSPATIAL_ISSUE,INVALID,Memiliki Flag Isu Geospasial GBIF (hasGeospatialIssues=True),6,0.0004
-INVALID_OUTSIDE_BBOX,INVALID,Koordinat di Luar Bounding Box Indonesia,15,0.001
-INVALID_NO_COORD,INVALID,"Koordinat Kosong atau (0, 0)",2950,0.1901

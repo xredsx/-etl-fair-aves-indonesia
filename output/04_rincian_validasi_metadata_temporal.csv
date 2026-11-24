@@ -1,9 +1,0 @@
-Kategori_Detail_VMT,Status_Dimensi_VMT,Keterangan,Jumlah_Record,Proporsi (%)
-VALID_ISO_AND_METADATA,VALID,"Tanggal ISO 8601 valid, konsisten dengan year/month, serta basisOfRecord & publisher terisi",1550823,99.9408
-WARNING_PARTIAL_OR_INTERVAL_DATE,WARNING,Tanggal parsial (YYYY / YYYY-MM) atau interval tanggal (verbatimEventDateRaw dipertahankan),918,0.0592
-WARNING_AMBIGUOUS_SLASH_DATE,WARNING,Tanggal format garis miring ambigu DD/MM vs MM/DD,0,0.0
-WARNING_YEAR_MONTH_MISMATCH,WARNING,Ketidaksesuaian nilai kolom year/month terhadap tanggal eventDate,0,0.0
-WARNING_MISSING_PUBLISHER,WARNING,Atribut publisher kosong meskipun tanggal dan basisOfRecord valid,0,0.0
-INVALID_MISSING_OR_UNPARSEABLE_DATE,INVALID,Tanggal eventDate kosong atau tidak dapat dikenali,0,0.0
-INVALID_FUTURE_DATE,INVALID,Tanggal observasi melebihi tanggal ekstraksi dataset,0,0.0
-INVALID_MISSING_BASIS_OF_RECORD,INVALID,Atribut basisOfRecord kosong,0,0.0
